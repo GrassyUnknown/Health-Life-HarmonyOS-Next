@@ -68,6 +68,84 @@ function getAchievement(key: string) {
     case 'on_99':
       result = AchievementMap.on_99;
       break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
+    case 'off_333':
+      result = AchievementMap.off_3;
+      break;
+    case 'on_333':
+      result = AchievementMap.on_3;
+      break;
     default:
       break;
   }

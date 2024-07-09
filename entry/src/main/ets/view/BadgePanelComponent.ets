@@ -23,6 +23,7 @@ import CardInfo from '../viewmodel/CardInfo'
 
 @Component
 export struct BadgePanel {
+  scroller: Scroller = new Scroller();
   @StorageProp(ACHIEVEMENT_LEVEL_KEY) successiveDays: number = 0;
 
   aboutToAppear() {
@@ -31,11 +32,31 @@ export struct BadgePanel {
   }
 
   build() {
-    Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap }) {
-      ForEach(getBadgeCardItems(this.successiveDays), (item: CardInfo) => {
-        BadgeCard({ content: item.titleContent, imgSrc: item.achievement })
-      })
+    Scroll(this.scroller){
+      Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap }) {
+        ForEach(getBadgeCardItems(this.successiveDays), (item: CardInfo) => {
+          BadgeCard({ content: item.titleContent, imgSrc: item.achievement })
+        })
+      }
+      .width(Const.FULL_WIDTH)
     }
-    .width(Const.FULL_WIDTH)
+    .scrollable(ScrollDirection.Vertical)  // 滚动方向纵向
+    .scrollBar(BarState.Auto)  // 滚动条自动显示
+    .scrollBarColor(Color.Gray)  // 滚动条颜色
+    .scrollBarWidth(4) // 滚动条宽度
+    .edgeEffect(EdgeEffect.None)
+    .onScroll((xOffset: number, yOffset: number) => {
+      console.info(xOffset + ' ' + yOffset)
+    })
+    .onScrollEdge((side: Edge) => {
+      console.info('To the edge')
+    })
+    .onScrollStop(() => {
+      console.info('Scroll Stop')
+    })
+  }
+
+  onScrollAction() {
+    throw new Error('Method not implemented.')
   }
 }
