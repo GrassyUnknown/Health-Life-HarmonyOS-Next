@@ -46,7 +46,7 @@ function frequencyStyle(isOpen: boolean, isAlarm: boolean) {
   .fontColor(isOpen && isAlarm ? $r('app.color.titleColor') : $r('app.color.disabledColor'))
 }
 
-
+// 任务编辑页面的任务名字，和是否开启
 @Component
 export struct TaskChooseItem {
   @Consume settingParams: ITaskItem;
@@ -60,6 +60,7 @@ export struct TaskChooseItem {
         .selectedColor($r('app.color.blueColor'))
         .onChange((isOn) => {
           this.settingParams.isOpen = isOn;
+
         })
     }
     .width(Const.THOUSANDTH_1000)

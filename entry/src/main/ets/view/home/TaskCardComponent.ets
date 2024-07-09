@@ -45,9 +45,9 @@ export struct TaskCard {
 
   @Builder
   targetValueBuilder() {
-    if (this.taskInfo.isDone) {
-      HealthText({ title: '', titleResource: $r('app.string.task_done') })
-    } else {
+    // if (this.taskInfo.isDone) {
+    //   HealthText({ title: '', titleResource: $r('app.string.task_done') })
+    // } else {
       Row() {
         HealthText({
           title: this.taskInfo.finValue || `--`,
@@ -56,14 +56,15 @@ export struct TaskCard {
         Text(` / ${this.taskInfo.targetValue} ${TaskMapById[this.taskInfo.taskID - 1].unit}`)
           .labelTextStyle()
           .fontWeight(Const.FONT_WEIGHT_400)
-      }
+        if (this.taskInfo.isDone){
+        HealthText({ title: '', titleResource: $r('app.string.task_done') })}
     }
   }
 
   build() {
     Row() {
       Row({ space: Const.DEFAULT_6 }) {
-        Image(TaskMapById[this.taskInfo.taskID - 1].icon)
+        Image(TaskMapById[this.taskInfo.taskID - 1].icon) // 首页任务icon
           .width($r('app.float.default_36')).height($r('app.float.default_36'))
           .objectFit(ImageFit.Contain)
         HealthText({

@@ -1,0 +1,96 @@
+├──entry/src/main/ets                 // 代码区
+│  ├──agency                          // 2x4 ArkTS卡片目录
+│  │  └──pages
+│  │     └──AgencyCard.ets            // 2x4 ArkTS卡片任务
+│  ├──common
+│  │  ├──constants
+│  │  │  └──CommonConstants.ets       // 公共常量
+│  │  ├──database
+│  │  │  ├──rdb                       // 数据库封装类
+│  │  │  │  ├──RdbHelper.ets
+│  │  │  │  ├──RdbHelperImp.ets
+│  │  │  │  ├──RdbUtils.ets
+│  │  │  │  └──TableHelper.ets
+│  │  │  └──tables                    // 数据表
+│  │  │     ├──DayInfoApi.ets
+│  │  │     ├──FormInfoApi.ets
+│  │  │     ├──GlobalInfoApi.ets
+│  │  │     └──TaskInfoApi.ets
+│  │  └──utils
+│  │     ├──BroadCast.ets             // 通知
+│  │     ├──FormUtils.ets             // 卡片操作工具类
+│  │     ├──GlobalContext.ets
+│  │     ├──HealthDataSrcMgr.ets      // 数据管理单例
+│  │     ├──Logger.ets                // 日志类
+│  │     └──Utils.ets                 // 工具类
+│  ├──entryability
+│  │  └──EntryAbility.ets             // 程序入口类
+│  ├──entryformability
+│  │  └──EntryFormAbility.ets         // 卡片创建，更新，删除操作类
+│  ├──model                           // model 里是一些数据，数据结构和封装的数据库类
+│  │  ├──AchieveModel.ets
+│  │  ├──DatabaseModel.ets            // 数据库model
+│  │  ├──Mine.ets
+│  │  ├──NavItemModel.ets             // 菜单栏model
+│  │  ├──RdbColumnModel.ets
+│  │  ├──TaskInitList.ets
+│  │  └──WeekCalendarModel.ets        // 日历model
+│  ├──pages
+│  │  ├──AdvertisingPage.ets          // 广告页
+│  │  ├──MainPage.ets                 // 应用主页面
+│  │  ├──MinePage.ets                 // 我的页面
+│  │  ├──SplashPage.ets               // 启动页
+│  │  ├──TaskEditPage.ets             // 任务编辑页面
+│  │  └──TaskListPage.ets             // 任务列表页面
+│  ├──progress                        // 2x2 ArkTS卡片目录
+│  │  └──pages
+│  │     └──ProgressCard.ets          // 2x2 ArkTS卡片任务进度
+│  ├──service
+│  │  └──ReminderAgent.ets            // 后台提醒代理操作类
+│  ├──view     // 自封装的ui组件，page中直接用，Page中注册回调函数
+│  │  ├──dialog                       // 弹窗组件（自定义对话框封装）
+│  │  │  ├──AchievementDialog.ets     // 成就弹窗
+│  │  │  ├──CustomDialogView.ets      // 自定义弹窗
+│  │  │  ├──TaskDetailDialog.ets      // 打卡弹窗
+│  │  │  ├──TaskDialogView.ets
+│  │  │  ├──TaskSettingDialog.ets     // 任务编辑相关弹窗
+│  │  │  └──UserPrivacyDialog.ets	// 用户权限申请弹窗
+│  │  ├──home                         // 主页面相关组件
+│  │  │  ├──AddBtnComponent.ets       // 添加任务按钮组件
+│  │  │  ├──HomeTopComponent.ets      // 首页顶部组件
+│  │  │  ├──TaskCardComponent.ets     // 任务item组件
+│  │  │  └──WeekCalendarComponent.ets // 日历组件
+│  │  ├──task                         // 任务相关组件
+│  │  │  ├──TaskDetailComponent.ets   // 任务编辑详情组件
+│  │  │  ├──TaskEditListItem.ets      // 任务编辑行内容
+│  │  │  └──TaskListComponent.ets     // 任务列表组件
+│  │  ├──AchievementComponent.ets     // 成就页面
+│  │  ├──BadgeCardComponent.ets       // 勋章卡片组件
+│  │  ├──BadgePanelComponent.ets      // 勋章面板组件
+│  │  ├──HealthTextComponent.ets      // 自定义text组件
+│  │  ├──HomeComponent.ets            // 首页页面
+│  │  ├──ListInfo.ets                 // 用户信息列表
+│  │  ├──TitleBarComponent.ets        // 成就标题组件
+│  │  └──UserBaseInfo.ets             // 用户基本信息
+│  └──viewmodel                       // viewmodel 展示的一些数据结构的 逻辑接口
+│     ├──AchievementInfo.ets          // 成就信息接口
+│     ├──AchievementMapInfo.ets       // 成就勋章信息接口
+│     ├──AchievementViewModel.ets     // 成就相关模块
+│     ├──AgencyCardInfo.ets           // 2x4卡片信息接口
+│     ├──BroadCastCallBackInfo.ets    // 回调相关接口
+│     ├──CalendarViewModel.ets        // 日历相关模块
+│     ├──CardInfo.ets                 // 卡片信息接口
+│     ├──ColumnInfo.ets               // 数据表信息接口
+│     ├──CommonConstantsInfo.ets      // 配置信息接口
+│     ├──DayInfo.ets                  // 每日信息接口
+│     ├──FormInfo.ets                 // 卡片信息接口
+│     ├──GlobalInfo.ets               // 全局信息接口
+│     ├──HomeViewModel.ets            // 首页相关模块
+│     ├──ProgressCardInfo.ets         // 2x2卡片信息接口
+│     ├──PublishReminderInfo.ets      // 提醒信息接口
+│     ├──ReminderInfo.ets             // 提醒操作接口
+│     ├──TaskInfo.ets                 // 任务信息接口
+│     ├──TaskViewModel.ets            // 任务设置相关模块
+│     ├──WeekCalendarInfo.ets         // 日期信息接口
+│     └──WeekCalendarMethodInfo.ets   // 日期操作接口
+└──entry/src/main/resources           // 资源文件目录

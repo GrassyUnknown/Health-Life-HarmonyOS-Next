@@ -22,7 +22,7 @@ export interface CustomDialogCallback {
   confirmCallback: Function;
   cancelCallback: Function;
 }
-
+// 各种任务设置的弹窗， 目标，提醒时间，频率
 @Component
 export struct TaskDialogView {
   @State isShow: boolean = false;

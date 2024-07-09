@@ -17,6 +17,7 @@ import { router } from '@kit.ArkUI';
 import HealthText from './HealthTextComponent';
 import AddBtn from '../view/home/AddBtnComponent';
 import { TaskCard } from '../view/home//TaskCardComponent';
+// 顶部区域组件
 import HomeTopView from '../view/home/HomeTopComponent';
 import { CustomDialogView, CustomDialogCallback } from '../view/dialog/CustomDialogView';
 import TaskInfo from '../viewmodel/TaskInfo';

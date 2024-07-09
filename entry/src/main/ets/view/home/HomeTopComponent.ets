@@ -38,8 +38,9 @@ export default struct HomeTopView {
         .opacity(Const.OPACITY_6)
         .padding({ left: $r('app.float.default_24') })
       Row() {
+        // 目标进度百分比数字
         HealthText({
-          title: this.homeStore.getDonePercent(),
+          title: this.homeStore.getDonePercent(),//获取任务完成度
           fontSize: $r('app.float.default_72'),
           fontFamily: $r('app.string.HarmonyHeiTi_Bold'),
           fontWeight: Const.FONT_WEIGHT_700
