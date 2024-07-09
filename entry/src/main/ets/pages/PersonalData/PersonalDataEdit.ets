@@ -1,4 +1,6 @@
 import Context from '@ohos.app.ability.common';
+import SelfInfo from '../../viewmodel/SelfInfo'
+import { SelfInfoApi } from '../../common/database/tables/SelfInfoApi'
 
 @Component
 struct TextFrame{
@@ -78,10 +80,19 @@ struct InputFrame{
 @Entry
 @Component
 struct PersonalEditIndex {
-  @State birthdate: string = '';
-  @State sex: string = '';
-  @State textValue: string = '';
-  @State inputValue: string = '';
+  api: SelfInfoApi = new SelfInfoApi();
+  selfInfo: SelfInfo = this.api.query();
+  @Watch('isEdit') @State name: string = this.selfInfo.name
+  @Watch('isEdit') @State birthdate: string = this.selfInfo.birth;
+  @Watch('isEdit') @State sex: string = this.selfInfo.gender;
+  @Watch('isEdit') @State hobby: string = this.selfInfo.hobby;
+  @Watch('isEdit') @State sig: string = this.sig;
+  @State editMode: boolean = false;
+
+  isEdit() {
+    this.editMode = true;
+  }
+
   selectedDate: Date = new Date("2010-1-1")
   selectedGender:number = 0
   private sexArray: string[] = ['男', '女'];

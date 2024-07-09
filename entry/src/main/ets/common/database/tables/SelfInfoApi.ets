@@ -18,6 +18,7 @@ import SelfInfo from '../../../viewmodel/SelfInfo';
 import { CommonConstants as Const } from '../../constants/CommonConstants'
 import RdbUtils from '../rdb/RdbUtils';
 import Logger from '../../utils/Logger';
+import GlobalInfo from '../../../viewmodel/GlobalInfo';
 
 export class SelfInfoApi {
 

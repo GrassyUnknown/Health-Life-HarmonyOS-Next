@@ -17,12 +17,12 @@ export default class SelfInfo {
   sig: string;
 
   constructor(
-    img: string,
-    name: string,
-    birth: string,
-    gender: string,
-    hobby: string,
-    sig: string
+    img: string = '',
+    name: string = '',
+    birth: string = '',
+    gender: string = '',
+    hobby: string = '',
+    sig: string = ''
   ) {
     this.img = img;
     this.name = name;
