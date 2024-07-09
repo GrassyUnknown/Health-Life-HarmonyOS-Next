@@ -33,7 +33,6 @@ import { getBadgeCardItems_single } from '../viewmodel/AchievementViewModel_sing
 export struct BadgePanel {
   scroller: Scroller = new Scroller();
   @StorageProp(ACHIEVEMENT_LEVEL_KEY) successiveDays: number = 0;
-  scroller: Scroller = new Scroller();
 
   aboutToAppear() {
     Logger.debug('BadgePanel', 'aboutToAppear');
