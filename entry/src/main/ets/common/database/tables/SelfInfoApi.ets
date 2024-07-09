@@ -28,80 +28,86 @@ export class SelfInfoApi {
    * @param selfInfo
    * @param callback
    */
-  insertData(selfInfo: SelfInfo, callback: Function): void {
-    /*
-    const valueBucket = generateBucket(globalInfo);
-    RdbUtils.insert('GlobalInfo', valueBucket).then(result => {
-      callback(result);
+  insertData(selfInfo: SelfInfo): number {
+    const valueBucket = generateBucket(selfInfo);
+    RdbUtils.insert('SelfInfo', valueBucket).then(result => {
+      Logger.info('SelfInfoTable', 'Insert selfInfo finished with code', result.toString());
+      return result;
     });
-    Logger.info('GlobalInfoTable', 'Insert globalInfo finished.');
-    */
+    return -1;
   }
 
   /**
-   * Update globalInfo.
+   * Update selfInfo.
    *
-   * @param globalInfo
+   * @param selfInfo
    * @param callback
    */
-  updateData(globalInfo: GlobalInfo, callback: Function): void {
-    const valueBucket = generateBucket(globalInfo);
-    let predicates = new relationalStore.RdbPredicates(Const.GLOBAL_INFO.tableName ? Const.GLOBAL_INFO.tableName : '');
+  updateData(selfInfo: SelfInfo): number {
+    const valueBucket = generateBucket(selfInfo);
+    let predicates = new relationalStore.RdbPredicates(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '');
     predicates.equalTo('id', 0);
     RdbUtils.update(valueBucket, predicates).then((result: number) => {
-      callback(result);
+      Logger.info('SelfInfoTable', 'Update selfInfo finished with code', result.toString());
+      return result;
     });
-    Logger.info('GlobalInfoTable', 'Update globalInfo finished.');
+    return -1;
   }
 
   /**
-   * Query globalInfo.
+   * Query selfInfo.
    *
    * @param callback
    */
   query(): SelfInfo {
-    return new SelfInfo();
-    /*
-    let predicates = new relationalStore.RdbPredicates(Const.GLOBAL_INFO.tableName ? Const.GLOBAL_INFO.tableName : '');
+    let predicates = new relationalStore.RdbPredicates(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '');
     predicates.equalTo('id', 0);
     RdbUtils.query(predicates).then(resultSet => {
       let count = resultSet.rowCount;
       if (count === 0) {
-        Logger.info('GlobalInfoTable', 'query no results!');
-        let result = new GlobalInfo('', '', 0, '');
-        callback(result);
+        Logger.info('SelfInfoTable', 'query no results!');
+        let result = new SelfInfo('', '', '', '', '', '');
+        return result;
       } else {
-        let result = new GlobalInfo('', '', 0, '');
+        let result = new SelfInfo('', '', '', '', '', '');
         resultSet.goToFirstRow();
-        result.firstDate = resultSet.getString(resultSet.getColumnIndex('firstDate'));
-        result.lastDate = resultSet.getString(resultSet.getColumnIndex('lastDate'));
-        result.checkInDays = resultSet.getDouble(resultSet.getColumnIndex('checkInDays'));
-        result.achievements = resultSet.getString(resultSet.getColumnIndex('achievements'));
-        callback(result);
+        result.img = resultSet.getString(resultSet.getColumnIndex('img'));
+        result.name = resultSet.getString(resultSet.getColumnIndex('name'));
+        result.birth = resultSet.getString(resultSet.getColumnIndex('birth'));
+        result.gender = resultSet.getString(resultSet.getColumnIndex('gender'));
+        result.hobby = resultSet.getString(resultSet.getColumnIndex('hobby'));
+        result.sig = resultSet.getString(resultSet.getColumnIndex('sig'));
+        return result;
       }
     });
-    */
+    return new SelfInfo('','','','','','');
   }
 }
 
-function generateBucket(globalInfo: GlobalInfo): relationalStore.ValuesBucket {
+function generateBucket(selfInfo: SelfInfo): relationalStore.ValuesBucket {
   let valueBucket = {} as relationalStore.ValuesBucket;
-  Const.GLOBAL_INFO.columns?.forEach((item: string) => {
+  Const.SELF_INFO.columns?.forEach((item: string) => {
     if (item === 'id') {
       valueBucket[item] = 0;
     } else {
       switch (item) {
-        case 'firstDate':
-          valueBucket[item] = globalInfo.firstDate;
+        case 'img':
+          valueBucket[item] = selfInfo.img;
           break;
-        case 'lastDate':
-          valueBucket[item] = globalInfo.lastDate;
+        case 'name':
+          valueBucket[item] = selfInfo.name;
           break;
-        case 'checkInDays':
-          valueBucket[item] = globalInfo.checkInDays;
+        case 'birth':
+          valueBucket[item] = selfInfo.birth;
           break;
-        case 'achievements':
-          valueBucket[item] = globalInfo.achievements;
+        case 'gender':
+          valueBucket[item] = selfInfo.gender;
+          break;
+        case 'hobby':
+          valueBucket[item] = selfInfo.hobby;
+          break;
+        case 'sig':
+          valueBucket[item] = selfInfo.sig;
           break;
         default:
           break;
@@ -111,6 +117,6 @@ function generateBucket(globalInfo: GlobalInfo): relationalStore.ValuesBucket {
   return valueBucket;
 }
 
-//let globalInfoApi = new GlobalInfoApi();
+let selfInfoApi = new SelfInfoApi();
 
-//export default globalInfoApi as GlobalInfoApi;
+export default selfInfoApi as SelfInfoApi;

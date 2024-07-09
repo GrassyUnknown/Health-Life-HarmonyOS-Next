@@ -27,6 +27,8 @@ import RdbUtils from '../common/database/rdb/RdbUtils';
 import Logger from '../common/utils/Logger';
 import FormUtils from '../common/utils/FormUtils';
 import { GlobalContext } from '../common/utils/GlobalContext';
+import SelfInfoApi from '../common/database/tables/SelfInfoApi';
+import SelfInfo from '../viewmodel/SelfInfo';
 
 export default class EntryAbility extends UIAbility {
   private static TAG: string = 'EntryAbility';
@@ -66,6 +68,7 @@ export default class EntryAbility extends UIAbility {
       .catch((err: Error) => {
         Logger.error(`RdbHelper formInfo err : ${JSON.stringify(err)}`);
       });
+    SelfInfoApi.insertData(new SelfInfo('','','','','',''));
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {
