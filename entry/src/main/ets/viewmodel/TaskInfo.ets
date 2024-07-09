@@ -53,7 +53,8 @@ export default class TaskInfo {
     this.startTime = startTime;
     this.endTime = endTime;
     this.frequency = frequency;
-    this.isDone = isDone;
+    // this.isDone = isDone;
+    this.isDone = false;
     this.finValue = finValue;
     this.isOpen = isOpen;
   }
@@ -65,7 +66,8 @@ export enum taskType {
   'eatApple',
   'smile',
   'brushTeeth',
-  'sleepEarly'
+  'sleepEarly',
+  'run'
 }
 
 export const oneWeek = oneWeekDictFunc();
