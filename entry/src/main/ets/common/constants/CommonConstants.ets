@@ -51,8 +51,8 @@ export class CommonConstants {
   } as CommonConstantsInfo
   /** self info table */
   static readonly SELF_INFO = {
-    tableName: 'selfInfo',
-    columns: ['name', 'img', 'birth', 'gender', 'hobby', 'sig']
+    tableName: 'SelfInfo',
+    columns: ['id', 'name', 'img', 'birth', 'gender', 'hobby', 'sig']
   } as CommonConstantsInfo
   // TaskNum
   static readonly TASK_NUM = 6;

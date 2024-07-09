@@ -30,6 +30,8 @@ import { GlobalContext } from '../common/utils/GlobalContext';
 import SelfInfoApi from '../common/database/tables/SelfInfoApi';
 import SelfInfo from '../viewmodel/SelfInfo';
 
+export const selfInfo: SelfInfo = new SelfInfo();
+
 export default class EntryAbility extends UIAbility {
   private static TAG: string = 'EntryAbility';
 
@@ -68,7 +70,8 @@ export default class EntryAbility extends UIAbility {
       .catch((err: Error) => {
         Logger.error(`RdbHelper formInfo err : ${JSON.stringify(err)}`);
       });
-    SelfInfoApi.insertData(new SelfInfo('','','','','',''));
+    console.info('insert to SelfInfo')
+    SelfInfoApi.insertData(new SelfInfo('img','xzai','2021-02-02','男','hobbies','sigs'));
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {

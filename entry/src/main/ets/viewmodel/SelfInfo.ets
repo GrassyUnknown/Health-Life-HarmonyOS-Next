@@ -31,4 +31,8 @@ export default class SelfInfo {
     this.hobby = hobby;
     this.sig = sig;
   }
+
+  toString(): string {
+    return this.img + ' ' + this.name + ' ' + this.birth + ' ' + this.hobby + ' ' + this.sig;
+  }
 }

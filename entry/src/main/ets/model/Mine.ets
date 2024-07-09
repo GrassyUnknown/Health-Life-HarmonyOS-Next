@@ -12,7 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import router from '@ohos.router';
+import SelfInfoApi from '../common/database/tables/SelfInfoApi';
+import SelfInfo from '../viewmodel/SelfInfo';
+import { router } from '@kit.ArkUI';
 
 
 export interface InfoItem {
@@ -21,7 +23,6 @@ export interface InfoItem {
   funct:()=>void;
   icon?: Resource;
 }
-
 
 /*
 getSelfInfo(){return selfInfo;}; 获取数据

@@ -28,13 +28,12 @@ export class SelfInfoApi {
    * @param selfInfo
    * @param callback
    */
-  insertData(selfInfo: SelfInfo): number {
+  insertData(selfInfo: SelfInfo): void {
     const valueBucket = generateBucket(selfInfo);
     RdbUtils.insert('SelfInfo', valueBucket).then(result => {
       Logger.info('SelfInfoTable', 'Insert selfInfo finished with code', result.toString());
       return result;
     });
-    return -1;
   }
 
   /**
@@ -45,7 +44,7 @@ export class SelfInfoApi {
    */
   updateData(selfInfo: SelfInfo): number {
     const valueBucket = generateBucket(selfInfo);
-    let predicates = new relationalStore.RdbPredicates(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '');
+    let predicates: relationalStore.RdbPredicates = new relationalStore.RdbPredicates(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '');
     predicates.equalTo('id', 0);
     RdbUtils.update(valueBucket, predicates).then((result: number) => {
       Logger.info('SelfInfoTable', 'Update selfInfo finished with code', result.toString());
@@ -59,16 +58,18 @@ export class SelfInfoApi {
    *
    * @param callback
    */
-  query(): SelfInfo {
+  query(callback: Function): void {
     let predicates = new relationalStore.RdbPredicates(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '');
+    console.info("SelfInfoTable type:" + Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '')
     predicates.equalTo('id', 0);
     RdbUtils.query(predicates).then(resultSet => {
       let count = resultSet.rowCount;
       if (count === 0) {
         Logger.info('SelfInfoTable', 'query no results!');
-        let result = new SelfInfo('', '', '', '', '', '');
-        return result;
+        let result = new SelfInfo('', 'xzai', '', '', '', '');
+        callback(result);
       } else {
+        Logger.info('SelfInfoTable:' + count);
         let result = new SelfInfo('', '', '', '', '', '');
         resultSet.goToFirstRow();
         result.img = resultSet.getString(resultSet.getColumnIndex('img'));
@@ -77,10 +78,9 @@ export class SelfInfoApi {
         result.gender = resultSet.getString(resultSet.getColumnIndex('gender'));
         result.hobby = resultSet.getString(resultSet.getColumnIndex('hobby'));
         result.sig = resultSet.getString(resultSet.getColumnIndex('sig'));
-        return result;
+        callback(result);
       }
     });
-    return new SelfInfo('','','','','','');
   }
 }
 

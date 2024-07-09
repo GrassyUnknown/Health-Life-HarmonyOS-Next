@@ -1,6 +1,23 @@
 import Context from '@ohos.app.ability.common';
 import SelfInfo from '../../viewmodel/SelfInfo'
-import { SelfInfoApi } from '../../common/database/tables/SelfInfoApi'
+import SelfInfoApi from '../../common/database/tables/SelfInfoApi'
+import { router } from '@kit.ArkUI';
+import dataPreferences from '@ohos.data.preferences';
+import { util } from '@kit.ArkTS';
+import { selfInfo } from '../../entryability/EntryAbility'
+
+function getSelfInfo() {
+  return selfInfo;
+}
+
+function updateSelfInfo(selfInfoNew: SelfInfo) {
+  selfInfo.img = selfInfoNew.img
+  selfInfo.name = selfInfoNew.name
+  selfInfo.birth = selfInfoNew.birth
+  selfInfo.gender = selfInfoNew.gender
+  selfInfo.hobby = selfInfoNew.hobby
+  selfInfo.sig = selfInfoNew.sig
+}
 
 @Component
 struct TextFrame{
@@ -49,7 +66,8 @@ struct TextFrame{
 @Component
 struct InputFrame{
   private inputImage: Resource = $r('app.media.per_name');
-  private hintText: string = '';
+  @Link hintText: string;
+  hidden: string = ''
 
   build(){
     Row() {
@@ -57,7 +75,7 @@ struct InputFrame{
         .width(24)
         .height(24)
         .margin({ left: 12 })
-      TextInput({ placeholder: this.hintText })
+      TextInput({ placeholder: this.hintText == '' ? this.hidden : this.hintText })
         .fontSize(16)
         .padding({ left: 12 })
         .placeholderColor('#99000000')
@@ -68,6 +86,11 @@ struct InputFrame{
         .margin({ right: 32 })
         .layoutWeight(1)
         .height(48)
+        .onChange((value:string)=>{
+          console.info('hidden value='+value)
+          this.hintText = value
+        })
+
     }
     .margin({ top: 24 })
     .borderRadius(24)
@@ -80,26 +103,27 @@ struct InputFrame{
 @Entry
 @Component
 struct PersonalEditIndex {
-  api: SelfInfoApi = new SelfInfoApi();
-  selfInfo: SelfInfo = this.api.query();
-  @Watch('isEdit') @State name: string = this.selfInfo.name
+  selfInfo: SelfInfo = getSelfInfo();
+  @State img: string = this.selfInfo.img;
+  @Watch('isEdit') @State name: string = this.selfInfo.name;
   @Watch('isEdit') @State birthdate: string = this.selfInfo.birth;
-  @Watch('isEdit') @State sex: string = this.selfInfo.gender;
+  @Watch('isEdit') @State gender: string = this.selfInfo.gender;
   @Watch('isEdit') @State hobby: string = this.selfInfo.hobby;
-  @Watch('isEdit') @State sig: string = this.sig;
+  @Watch('isEdit') @State sig: string = this.selfInfo.sig;
   @State editMode: boolean = false;
 
   isEdit() {
+    console.info('edit mode')
     this.editMode = true;
   }
 
   selectedDate: Date = new Date("2010-1-1")
   selectedGender:number = 0
-  private sexArray: string[] = ['男', '女'];
+  private sexArray: string[] = ['男', '女', '保密'];
 
-  alertDialog(context: Context.UIAbilityContext) {
+  alertDialog(context: Context.UIAbilityContext, backFunc: ()=>void) {
     AlertDialog.show({
-      message: '当前数据未保存，是否确认离开？',
+      message: '当前数据' + (this.editMode ? '未' : '已') + '保存，是否确认离开？',
       alignment: DialogAlignment.Bottom,
       offset: {
         dx: 0,
@@ -113,11 +137,7 @@ struct PersonalEditIndex {
       },
       secondaryButton: {
         value: '确定',
-        action: () => {
-          // Exiting the app.
-          context.terminateSelf();
-          console.info('Callback definite button is clicked');
-        }
+        action: backFunc
       }
     });
   }
@@ -132,7 +152,7 @@ struct PersonalEditIndex {
         let year = value.year;
         let month = 1;
         if(value.month) {
-          let month = value.month + 1;
+          month = value.month + 1;
         }
         let day = value.day;
         let birthdate: string = this.getBirthDateValue(year, month, day);
@@ -144,7 +164,7 @@ struct PersonalEditIndex {
 
   textPickerDialog(sexArray: string[], sexCallback:(sexValue: string)=>void) {
     if (this.isEmptyArr(sexArray)) {
-      console.error('sex is null');
+      console.error('gender is null');
       return;
     }
     TextPickerDialog.show({
@@ -188,13 +208,48 @@ struct PersonalEditIndex {
             })
             .onClick(() => {
               let context = getContext(this) as Context.UIAbilityContext;
-              this.alertDialog(context);
+              this.alertDialog(context, ()=>{
+                router.back(
+                  {
+                    url: 'pages/MainPage',
+                    params: {
+                      param: selfInfo
+                    }
+                  }
+                )
+              });
             })
           Text('个人信息')
             .fontColor(Color.Black)
             .fontSize(20)
             .margin({ top: 20,left:20 })
             .alignSelf(ItemAlign.Center)
+          if(this.editMode) {
+            Text('保存')
+              .fontColor(Color.Green)
+              .fontSize(20)
+              .margin({ top: 20,left:20 })
+              .alignSelf(ItemAlign.Center)
+              .onClick(()=>{
+                let selfInfo = new SelfInfo(
+                  this.img,
+                  this.name,
+                  this.birthdate,
+                  this.gender,
+                  this.hobby,
+                  this.sig
+                )
+                console.info('update:' + selfInfo.toString())
+                updateSelfInfo(selfInfo)
+                this.editMode = false
+              })
+          } else {
+            Text('保存')
+              .fontColor(Color.Black)
+              .fontSize(20)
+              .margin({ top: 20,left:20 })
+              .alignSelf(ItemAlign.Center)
+          }
         }
         .width('100%')
 
@@ -208,10 +263,13 @@ struct PersonalEditIndex {
           .fontSize(16)
           .margin({ top: '2.1%' })
           .alignSelf(ItemAlign.Center)
+
         InputFrame({
           inputImage: $r('app.media.per_name'),
-          hintText: '昵称'
+          hintText: this.name,
+          hidden: '昵称'
         })
+
         TextFrame({
           textImage: $r('app.media.per_birth'),
           text: '出生日期',
@@ -223,20 +281,23 @@ struct PersonalEditIndex {
         TextFrame({
           textImage: $r('app.media.per_gender'),
           text: '性别',
-          content: $sex,
+          content: $gender,
           onTextClick: () => {
             this.textPickerDialog(this.sexArray, (sexValue: string) => {
-              this.sex = sexValue;
+              console.info(sexValue)
+              this.gender = sexValue;
             });
           }
         })
         InputFrame({
           inputImage: $r('app.media.per_hobby'),
-          hintText: '兴趣爱好'
+          hintText: this.hobby,
+          hidden: '身高'
         })
         InputFrame({
           inputImage: $r('app.media.per_sig'),
-          hintText: '个性签名'
+          hintText: this.sig,
+          hidden: '体重'
         })
       }
       .backgroundColor('#F5F5F5')

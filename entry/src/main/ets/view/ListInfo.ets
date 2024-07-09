@@ -22,7 +22,10 @@ export struct ListInfo {
       ForEach(MineInfoList, (item: InfoItem) => {
         ListItem() {
           Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-            Text(item.title).fontSize($r('app.float.default_16')).height($r('app.float.default_40'))
+            Text(item.title)
+              .fontSize($r('app.float.default_16'))
+              .height($r('app.float.default_40'))
+              .onClick(item.funct)
             Image($r('app.media.ic_right_grey'))
               .objectFit(ImageFit.Contain)
               .height($r('app.float.default_12'))
