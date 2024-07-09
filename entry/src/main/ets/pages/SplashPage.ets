@@ -29,7 +29,7 @@ const IS_PRIVACY: string = 'isPrivacy';
 struct SplashIndex {
   context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
   dialogController: CustomDialogController = new CustomDialogController({
-    builder: UserPrivacyDialog(
+    builder: UserPrivacyDialog( // 询问隐私弹窗组件
       {
         cancel: () => {
           this.exitApp();

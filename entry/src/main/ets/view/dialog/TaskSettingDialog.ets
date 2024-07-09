@@ -16,7 +16,7 @@
 import { promptAction } from '@kit.ArkUI';
 import { ITaskItem } from '../../model/TaskInitList';
 import { frequencyRange } from '../../common/utils/Utils';
-import { returnTimeStamp, createAppleRange, createDrinkRange, createRunRange, formatTime } from '../../viewmodel/TaskViewModel';
+import { returnTimeStamp, createAppleRange, createDrinkRange, createBrushRange, createSmileRange, formatTime } from '../../viewmodel/TaskViewModel';
 import { taskType } from '../../viewmodel/TaskInfo';
 import { CommonConstants as Const } from '../..//common/constants/CommonConstants';
 import { FrequencyContentType } from '../../model/TaskInitList';
@@ -28,8 +28,11 @@ export struct TargetSettingDialog {
   drinkRange: string[] = createDrinkRange();
   appleRange: string[] = createAppleRange();
   runRange: string[] = createRunRange();
+  brushRange: string[] = createBrushRange();
+  smileRange: string[] = createSmileRange();
   currentValue: string = this.settingParams.targetValue;
   currentTime: string = Const.DEFAULT_TIME;
+
 
   compareTime(startTime: string, endTime: string) {
     if (returnTimeStamp(this.currentTime) < returnTimeStamp(startTime) ||
@@ -58,6 +61,7 @@ export struct TargetSettingDialog {
       return;
     }
     this.settingParams.targetValue = this.currentValue;
+    // this.settingParams.finValue='0';
   }
 
   build() {

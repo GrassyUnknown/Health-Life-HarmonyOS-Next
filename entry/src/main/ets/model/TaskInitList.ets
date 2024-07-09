@@ -30,6 +30,7 @@ export interface ITaskItem {
   frequency: string;
   isInit: boolean;
   step: number;
+  finValue:string;
 }
 
 export interface RemindContentItem {
@@ -46,10 +47,10 @@ export interface FrequencyContentType {
 export const TaskList: TaskInfo[] = [
   new TaskInfo(0, '', 1, '7:00', true, '', ';', '', false, '', true),
   new TaskInfo(1, '', 2, '1.5', true, '', ';', '', false, '', true),
-  new TaskInfo(2, '', 3, '3', true, '08: 00', '', '', false, '', true),
-  new TaskInfo(3, '', 4, '1', true, '', ';', '', false, '', true),
-  new TaskInfo(4, '', 5, '21:30', true, '', ';', '', false, '', true),
-  new TaskInfo(5, '', 6, '22:00', true, '', ';', '', false, '', true),
+  new TaskInfo(2, '', 3, '3', true, '08: 00', '', '', false, '0', true),
+  new TaskInfo(3, '', 4, '1', true, '', ';', '', false, '0', true),
+  new TaskInfo(4, '', 5, '21:30', true, '', ';', '', false, '0', true),
+  new TaskInfo(5, '', 6, '22:00', true, '', ';', '', false, '', true)，
   new TaskInfo(6, '', 7, '1', true, '', ';', '', false, '', true)
 ]
 
@@ -71,7 +72,8 @@ export const TaskMapById: Array<ITaskItem> = [
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: '',
   },
   {
     taskID: 2,
@@ -86,7 +88,8 @@ export const TaskMapById: Array<ITaskItem> = [
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: '',
   },
   {
     taskID: 3,
@@ -101,7 +104,8 @@ export const TaskMapById: Array<ITaskItem> = [
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: '0',
   },
   {
     taskID: 4,
@@ -111,12 +115,13 @@ export const TaskMapById: Array<ITaskItem> = [
     targetValue: '1',
     isOpen: false,
     unit: '次',
-    step: 0,
+    step: 1,
     isInit: true,
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: '0',
   },
   {
     taskID: 5,
@@ -126,12 +131,14 @@ export const TaskMapById: Array<ITaskItem> = [
     targetValue: '1',
     isOpen: false,
     unit: '次',
-    step: 0,
+    step: 1,
     isInit: true,
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: '0',
+
   },
   {
     taskID: 6,
@@ -146,7 +153,8 @@ export const TaskMapById: Array<ITaskItem> = [
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: ''
   },
   {
     taskID: 7,
@@ -161,11 +169,12 @@ export const TaskMapById: Array<ITaskItem> = [
     isAlarm: false,
     startTime: '08: 00',
     endTime: '00: 00',
-    frequency: '1, 2, 3, 4, 5, 6, 7'
+    frequency: '1, 2, 3, 4, 5, 6, 7',
+    finValue: ''
   }
 ]
 
-export const TaskItem = new TaskInfo(1, '', 0, '7:00', true, 'string', 'string;', '', true, '6:58', false);
+export const TaskItem = new TaskInfo(1, '', 0, '7:00', true, 'string', 'string;', '', true, '', false);
 
 export const RemindContentMap: Array<RemindContentItem> = [
   {

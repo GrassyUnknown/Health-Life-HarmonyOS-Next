@@ -162,9 +162,9 @@ export class CommonConstants {
   static readonly DRINK_MAX_RANGE: number = 500;
   static readonly TIMES_50: number = 50;
   static readonly TIMES_100: number = 100;
-  static readonly EAT_APPLE_RANGE: number = 100;
-  static readonly RUN_STEP: number = 25;
-  static readonly RUN_MAX_RANGE: number = 1000;
+  static readonly EAT_APPLE_RANGE: number = 10;
+  static readonly BRUSH_MAX_RANGE: number = 3;
+  static readonly SMILE_MAX_RANGE: number = 3;
   // letter spacing
   static readonly LETTER_1: number = 0.1;
   static readonly LETTER_34: number = 3.4;
