@@ -72,6 +72,7 @@ export struct BadgePanel {
     .onScrollStop(() => {
       console.info('Scroll Stop')
     })
+    .height('91%')
   }
 
   onScrollAction() {

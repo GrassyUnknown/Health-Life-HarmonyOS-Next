@@ -98,27 +98,27 @@
     },
     {
       "name": "task_achievement_single_drink_task",
-      "value": "喝水%d达成"
+      "value": "喝水%d%达成"
     },
     {
       "name": "task_achievement_single_apple_task",
-      "value": "吃苹果%d达成"
+      "value": "吃苹果%d%达成"
     },
     {
       "name": "task_achievement_single_smile_task",
-      "value": "微笑%d达成"
+      "value": "微笑%d%达成"
     },
     {
       "name": "task_achievement_single_brush_task",
-      "value": "刷牙%d达成"
+      "value": "刷牙%d%达成"
     },
     {
       "name": "task_achievement_single_morning_task",
-      "value": "早起%d达成"
+      "value": "早起%d%达成"
     },
     {
       "name": "task_achievement_single_sleep_task",
-      "value": "早睡%d达成"
+      "value": "早睡%d%达成"
     },
     {
       "name": "already_open",
