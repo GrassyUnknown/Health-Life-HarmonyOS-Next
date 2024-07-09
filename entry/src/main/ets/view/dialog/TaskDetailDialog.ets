@@ -18,6 +18,7 @@ import TaskInfo from '../../viewmodel/TaskInfo';
 import { TaskMapById } from '../../model/TaskInitList';
 import { CommonConstants as Const } from '../../common/constants/CommonConstants';
 import { GlobalContext } from '../../common/utils/GlobalContext';
+import { CJCalendar, OptMode, SelectedStyle } from 'cjcalendar'
 
 @Extend(Text)
 function textStyle() {
@@ -97,6 +98,7 @@ struct TaskClock {
 
   build() {
     Column({ space: Const.DEFAULT_12 }) {
+      CJCalendar()
       Button() {
         Text($r('app.string.clock_in'))
           .height($r('app.float.default_42'))
@@ -112,7 +114,6 @@ struct TaskClock {
         this.confirm();
       })
       .visibility(!this.showButton ? Visibility.None : Visibility.Visible)
-
       Text($r('app.string.got_it'))
         .fontSize($r('app.float.default_14'))
         .fontWeight(FontWeight.Regular)

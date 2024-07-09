@@ -1,0 +1,27 @@
+{
+	"app": {
+		"bundleName": "com.cj.demo",
+		"debug": true,
+		"versionCode": 1000000,
+		"versionName": "1.0.0",
+		"minAPIVersion": 40100011,
+		"targetAPIVersion": 50000012,
+		"apiReleaseType": "Beta1",
+		"compileSdkVersion": "5.0.0.25",
+		"compileSdkType": "HarmonyOS",
+		"appEnvironments": [],
+		"bundleType": "app"
+	},
+	"module": {
+		"name": "cjcalendar",
+		"type": "har",
+		"deviceTypes": [
+			"default",
+			"tablet"
+		],
+		"installationFree": false,
+		"virtualMachine": "ark11.0.2.0",
+		"compileMode": "esmodule",
+		"dependencies": []
+	}
+}
