@@ -130,7 +130,7 @@ export const addTask = (params: TaskInfo, context: Context) => {
     let taskInfoStr = JSON.stringify(params);
     let taskInfo: TaskInfo = JSON.parse(taskInfoStr);
     taskInfo.date = new Date().toDateString();
-    taskInfo.isDone = true;
+    taskInfo.isDone = false;
     TaskInfoApi.updateDataByDate(taskInfo, (flag: number) => {
       if (!flag) {
         Logger.error('insertTaskSetting', 'updateTaskSetting Error!');

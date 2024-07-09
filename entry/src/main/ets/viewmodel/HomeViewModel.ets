@@ -129,8 +129,9 @@ export class HomeStore {
       let startTime = editedTaskInfo.startTime;
       let endTime = editedTaskInfo.endTime;
       let isOpen = editedTaskInfo.isOpen;
+      let finValue = editedTaskInfo.finValue;
       let task = new TaskInfo(0, dateToStr(new Date()), taskID, targetValue, isAlarm,
-        startTime, endTime, frequency, true, targetValue, isOpen);
+        startTime, endTime, frequency, true, finValue, isOpen);
       this.dateArr = this.dateArr.map((item: WeekDateModel) => {
         if (task.date === item.dateStr) {
           Logger.info('item', JSON.stringify(item));
@@ -252,11 +253,12 @@ export class HomeStore {
       let hasExceed = updateTask.isDone;
       if (step === 0) {
         updateTask.isDone = true;
-        updateTask.finValue = targetValue;
+        updateTask.finValue = '';
       } else {
         let value = Number(finValue) + step;
         updateTask.isDone = updateTask.isDone || value >= Number(targetValue);
-        updateTask.finValue = updateTask.isDone ? targetValue : `${value}`;
+        // updateTask.finValue = updateTask.isDone ? targetValue : `${value}`;
+        updateTask.finValue = `${value}`
       }
       TaskInfoTableApi.updateDataByDate(updateTask, (res: number) => {
         if (!res || hasExceed) {

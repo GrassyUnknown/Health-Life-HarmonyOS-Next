@@ -32,6 +32,7 @@ export struct TargetSettingDialog {
   currentValue: string = this.settingParams.targetValue;
   currentTime: string = Const.DEFAULT_TIME;
 
+
   compareTime(startTime: string, endTime: string) {
     if (returnTimeStamp(this.currentTime) < returnTimeStamp(startTime) ||
       returnTimeStamp(this.currentTime) > returnTimeStamp(endTime)) {
@@ -59,6 +60,7 @@ export struct TargetSettingDialog {
       return;
     }
     this.settingParams.targetValue = this.currentValue;
+    // this.settingParams.finValue='0';
   }
 
   build() {
