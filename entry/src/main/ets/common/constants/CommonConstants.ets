@@ -50,7 +50,7 @@ export class CommonConstants {
     columns: ['id', 'formId', 'formName', 'formDimension']
   } as CommonConstantsInfo
   // TaskNum
-  static readonly TASK_NUM = 7;
+  static readonly TASK_NUM = 6;
   // THOUSANDTH
   static readonly THOUSANDTH_15: string = '1.5%'; // ‘1.5%’
   static readonly THOUSANDTH_12: string = '2.2%'; // ‘2.2%’
@@ -197,14 +197,12 @@ export enum TaskType {
   Apple = 'apple',
   Smile = 'smile',
   Clean = 'clean',
-  Sleep = 'sleep',
-  Run = 'run'
+  Sleep = 'sleep'
 }
 
 export enum Unit {
   Liter = 'L',
   Pcs = '个',
   Times = '次',
-  Distance = 'km',
   Empty = ''
 }
