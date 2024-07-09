@@ -31,6 +31,7 @@ import { getBadgeCardItems_single } from '../viewmodel/AchievementViewModel_sing
 
 @Component
 export struct BadgePanel {
+  scroller: Scroller = new Scroller();
   @StorageProp(ACHIEVEMENT_LEVEL_KEY) successiveDays: number = 0;
   scroller: Scroller = new Scroller();
 
