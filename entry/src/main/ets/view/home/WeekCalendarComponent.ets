@@ -29,7 +29,7 @@ const DEFAULT_SCROLL_PERCENT = 0.934; // default calendar width percent
 
 @Component
 export struct WeekCalendar {
-  @Link homeStore: HomeStore;
+  @Link homeStore: HomeStore;//@Link装饰的变量与其父组件中的数据源共享相同的值
   currentPage: number = 1;
   private scroller: Scroller = new Scroller();
   scrollWidth: number = DEFAULT_SCROLL_WIDTH;
