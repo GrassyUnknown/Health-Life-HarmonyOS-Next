@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { router } from '@kit.ArkUI';
+import { CommonConstants as Const } from '../common/constants/CommonConstants';
+import { CJCalendar, OptMode, SelectedStyle } from 'cjcalendar'
+
+@Entry
+@Component
+struct MonthCalendar {
+  @State duration: number = Const.AD_DURATION;
+  private intervalId: number = -1;
+
+  goToHomePage() {
+    clearInterval(this.intervalId);
+    router.replaceUrl({ url: 'pages/MainPage' });
+  }
+
+  aboutToAppear() {
+
+  }
+  build() {
+    Column() {
+      Row(){
+        Text($r('app.string.jump_ad', this.duration))
+          .fontSize($r('app.float.default_12'))
+          .fontColor($r('app.color.black'))
+          .borderRadius($r('app.float.default_16'))
+          .letterSpacing(Const.LETTER_1)
+          .height($r('app.float.default_36'))
+          .backgroundColor('rgba(188, 18, 18, 0.20)')
+          .border({ color: $r('app.color.white'), width: $r('app.float.default_1') })
+          .margin({ top: $r('app.float.default_36') })
+          .padding($r('app.float.default_8'))
+          .onClick(() => this.goToHomePage())
+      }
+      Row() {
+        CJCalendar().height("100%")
+      }
+    .width('100%')
+    .height('100%')
+    //.backgroundImagePosition({ x: 0, y: 0 })
+    //.backgroundImage($r('app.media.ic_ad_bg'))
+    //.backgroundImageSize({ width: '100%', height: '100%' })
+    .justifyContent(FlexAlign.SpaceBetween)
+    }
+  }
+}

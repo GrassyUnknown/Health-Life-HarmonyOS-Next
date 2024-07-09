@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { display } from '@kit.ArkUI';
+import { display, router } from '@kit.ArkUI';
 import WeekCalendarMethods, { ScrollTo } from '../../viewmodel/CalendarViewModel';
 import { HomeStore } from '../../viewmodel/HomeViewModel';
 import HealthText from '../../view/HealthTextComponent';
@@ -21,9 +21,9 @@ import { WeekDateModel } from '../../model/WeekCalendarModel';
 import { sameDate } from '../../common/utils/Utils';
 import { CommonConstants as Const } from '../../common/constants/CommonConstants';
 import Logger from '../../common/utils/Logger';
+import { CJCalendar } from 'cjcalendar'
 
 export const WEEK_DAY_WIDTH: number = 100 / Const.WEEK_DAY_NUM;
-
 const DEFAULT_SCROLL_WIDTH = 336; // default calendar width
 const DEFAULT_SCROLL_PERCENT = 0.934; // default calendar width percent
 
@@ -82,6 +82,20 @@ export struct WeekCalendar {
           HealthText({ title: this.homeStore.dateTitle, fontSize: $r('app.float.default_14') })
             .margin($r('app.float.default_12'))
           this.ArrowIcon(true)
+          Button({ type: ButtonType.Circle, stateEffect: true }) {
+            LoadingProgress().width(30).height(20).color(0xFFFFFF)
+          }.width(55).height(55).margin({ left: 20 }).backgroundColor(0xF55A42)
+          .onClick(()=>{
+            router.pushUrl({
+              url: 'pages/MonthCalendar',
+              params: {
+                data1: 'message',
+                data2: {
+                  data3: [123, 456, 789]
+                }
+              }
+            })
+          })
         }
         .justifyContent(FlexAlign.Center)
 
