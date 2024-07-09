@@ -20,7 +20,7 @@ import Logger from '../common/utils/Logger';
 import { ITaskItem } from '../model/TaskInitList';
 import { CommonConstants as Const } from '../common/constants/CommonConstants';
 import { NavList, TabId } from '../model/NavItemModel';
-// 导航栏的三个
+// 导航栏的三个 咱们
 import HomeIndex from '../view/HomeComponent';
 import { AchievementIndex } from '../view/AchievementComponent';
 import { MineIndex } from './MinePage';

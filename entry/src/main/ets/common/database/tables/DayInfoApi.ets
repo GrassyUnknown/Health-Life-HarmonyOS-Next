@@ -19,7 +19,7 @@ import { CommonConstants as Const } from '../../constants/CommonConstants'
 import RdbUtils from '../rdb/RdbUtils';
 import Logger from '../../utils/Logger';
 
-class  {
+class  DayInfoApi{
 
   /**
    * Insert dayInfo.
