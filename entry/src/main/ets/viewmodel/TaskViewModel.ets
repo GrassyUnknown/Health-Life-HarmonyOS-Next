@@ -235,16 +235,6 @@ export const createAppleRange = () => {
   return appleRangeArr;
 }
 /**
- * @description Generate the range of running 1 - 30
- * @return Array<string>
- */
-export const createRunRange = () => {
-  const runRangeArr: Array<string> = [];
-  for (let i = Const.RUN_STEP; i <= Const.RUN_MAX_RANGE; i += Const.RUN_STEP) {
-    runRangeArr.push(`${i / Const.TIMES_100} km`);
-  }
-  return runRangeArr;
-/**
  * @description Generate the range of brushing 1 - 3
  * @return Array<string>
  */
