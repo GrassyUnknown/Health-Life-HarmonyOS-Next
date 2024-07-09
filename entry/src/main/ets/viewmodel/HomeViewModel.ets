@@ -195,7 +195,7 @@ export class HomeStore {
   }
 
   public getDonePercent(): string {
-    let dayInfo = this.selectedDayInfo?.dayInfo;
+    let dayInfo = this.selectedDayInfo?.dayInfo; // ?. 是否有dayinfo
     Logger.debug("dayInfo", JSON.stringify(dayInfo));
     if (dayInfo && (dayInfo?.finTaskNum || 0) > 0) {
       if (dayInfo.finTaskNum > dayInfo.targetTaskNum) {

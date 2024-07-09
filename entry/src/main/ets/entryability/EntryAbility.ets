@@ -29,7 +29,7 @@ import { GlobalContext } from '../common/utils/GlobalContext';
 
 export default class EntryAbility extends UIAbility {
   private static TAG: string = 'EntryAbility';
-
+  // UIA实例
   async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
     GlobalContext.getContext().setObject('want', want);
     GlobalContext.getContext().setObject('launchParam', launchParam);
@@ -62,7 +62,7 @@ export default class EntryAbility extends UIAbility {
         Logger.error(`RdbHelper formInfo err : ${JSON.stringify(err)}`);
       });
   }
-
+  // UI页面管理器
   onWindowStageCreate(windowStage: window.WindowStage) {
     // Main window is created, set main page for this ability
     GlobalContext.getContext().setObject('isForeground', true);

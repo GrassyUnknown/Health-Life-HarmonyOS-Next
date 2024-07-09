@@ -59,7 +59,7 @@ export struct WeekCalendar {
   }
 
   @Builder
-  ArrowIcon(isRight: boolean) {
+  ArrowIcon(isRight: boolean) { // 日历的左右箭头
     Row() {
       Image($r('app.media.ic_right_grey'))
         .width($r('app.float.default_6'))
@@ -69,7 +69,7 @@ export struct WeekCalendar {
     .height($r('app.float.default_20'))
     .rotate({ z: 1, angle: isRight ? 0 : Const.DEFAULT_180 })
     .justifyContent(FlexAlign.Center)
-    .onClick(() => isRight ?
+    .onClick(() => isRight ? // 点击右边 左边箭头的触发事件
     WeekCalendarMethods.goToNextWeek(this.currentPage, this.isPageScroll, this.homeStore, this.scroller) :
     WeekCalendarMethods.gotoPreviousWeek(this.isPageScroll, this.homeStore, this.currentPage, this.scroller))
   }
@@ -78,7 +78,7 @@ export struct WeekCalendar {
     Row() {
       Column() {
         Row() {
-          this.ArrowIcon(false)
+          this.ArrowIcon(false) // 箭头
           HealthText({ title: this.homeStore.dateTitle, fontSize: $r('app.float.default_14') })
             .margin($r('app.float.default_12'))
           this.ArrowIcon(true)

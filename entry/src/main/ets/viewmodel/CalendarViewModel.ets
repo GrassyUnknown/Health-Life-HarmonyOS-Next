@@ -51,7 +51,7 @@ function gotoPreviousWeek(isPageScroll: Boolean, homeStore: HomeStore, currentPa
 }
 
 function goToNextWeek(currentPage: number, isPageScroll: Boolean, homeStore: HomeStore, scroller: Scroller) {
-  if (currentPage <= 0) {
+  if (currentPage <= 0) { // 不能再前移了 已经最新
     Logger.info('HomeIndex', 'goToNextWeek: is the current week');
     return;
   }
