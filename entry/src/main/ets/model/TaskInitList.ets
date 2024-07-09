@@ -49,7 +49,8 @@ export const TaskList: TaskInfo[] = [
   new TaskInfo(2, '', 3, '3', true, '08: 00', '', '', false, '', true),
   new TaskInfo(3, '', 4, '1', true, '', ';', '', false, '', true),
   new TaskInfo(4, '', 5, '21:30', true, '', ';', '', false, '', true),
-  new TaskInfo(5, '', 6, '22:00', true, '', ';', '', false, '', true)
+  new TaskInfo(5, '', 6, '22:00', true, '', ';', '', false, '', true),
+  new TaskInfo(6, '', 7, '1', true, '', ';', '', false, '', true)
 ]
 
 let achievementMap = new AchievementMapInfo();
@@ -140,6 +141,21 @@ export const TaskMapById: Array<ITaskItem> = [
     targetValue: '20: 00',
     isOpen: false,
     unit: '',
+    step: 0,
+    isInit: true,
+    isAlarm: false,
+    startTime: '08: 00',
+    endTime: '00: 00',
+    frequency: '1, 2, 3, 4, 5, 6, 7'
+  },
+  {
+    taskID: 7,
+    taskName: $r('app.string.task_run'),
+    icon: $r("app.media.ic_task_run"),  // 待添加图片
+    dialogBg: $r('app.media.ic_dialog_run'),  // 待添加打卡对话框图片
+    targetValue: '1',
+    isOpen: false,
+    unit: 'km',
     step: 0,
     isInit: true,
     isAlarm: false,
