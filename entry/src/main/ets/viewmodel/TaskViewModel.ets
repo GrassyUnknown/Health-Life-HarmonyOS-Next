@@ -245,6 +245,7 @@ export const createRunRange = () => {
     runRangeArr.push(`${i / Const.TIMES_100} km`);
   }
   return runRangeArr;
+}
 /**
  * @description Generate the range of brushing 1 - 3
  * @return Array<string>
