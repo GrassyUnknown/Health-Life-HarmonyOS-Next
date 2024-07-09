@@ -68,6 +68,7 @@ function getAchievement(key: string) {
     case 'on_99':
       result = AchievementMap.on_99;
       break;
+
     default:
       break;
   }

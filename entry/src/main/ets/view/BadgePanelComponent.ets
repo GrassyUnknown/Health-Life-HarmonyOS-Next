@@ -20,6 +20,13 @@ import Logger from '../common/utils/Logger'
 import { ACHIEVEMENT_LEVEL_KEY } from '../model/AchieveModel'
 import { CommonConstants as Const } from '../common/constants/CommonConstants';
 import CardInfo from '../viewmodel/CardInfo'
+import { BadgeCard_morning_single } from './morning_single_task'
+import { BadgeCard_drink_single } from './drink_single_task'
+import { BadgeCard_apple_single } from './apple_single_rask'
+import { BadgeCard_smile_single } from './smile_single_task'
+import { BadgeCard_brush_single } from './brush_single_task'
+import { BadgeCard_sleep_single } from './sleep_single_task'
+
 
 @Component
 export struct BadgePanel {
@@ -31,9 +38,17 @@ export struct BadgePanel {
   }
 
   build() {
-    Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap }) {
-      ForEach(getBadgeCardItems(this.successiveDays), (item: CardInfo) => {
-        BadgeCard({ content: item.titleContent, imgSrc: item.achievement })
+    Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap })
+    {
+      ForEach(getBadgeCardItems(this.successiveDays), (item: CardInfo) =>
+      {
+        BadgeCard_morning_single({ content: item.titleContent, imgSrc: item.achievement })
+        BadgeCard_drink_single({ content: item.titleContent, imgSrc: item.achievement })
+        BadgeCard_apple_single({ content: item.titleContent, imgSrc: item.achievement })
+        BadgeCard_smile_single({ content: item.titleContent, imgSrc: item.achievement })
+        BadgeCard_brush_single({ content: item.titleContent, imgSrc: item.achievement })
+        BadgeCard_sleep_single({ content: item.titleContent, imgSrc: item.achievement })
+
       })
     }
     .width(Const.FULL_WIDTH)
