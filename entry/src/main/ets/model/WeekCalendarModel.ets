@@ -21,7 +21,7 @@ import WeekCalendarInfo from '../viewmodel/WeekCalendarInfo';
 
 // day number of on week
 export const WEEK_DAY_NUM: number = 7;
-
+// 日历小组件
 export class WeekDateModel {
   weekTitle: string;
   dateStr: string;
