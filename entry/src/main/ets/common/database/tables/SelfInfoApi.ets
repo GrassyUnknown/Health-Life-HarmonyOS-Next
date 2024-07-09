@@ -19,9 +19,8 @@ import { CommonConstants as Const } from '../../constants/CommonConstants'
 import RdbUtils from '../rdb/RdbUtils';
 import Logger from '../../utils/Logger';
 import GlobalInfo from '../../../viewmodel/GlobalInfo';
-import GlobalInfoApi from './GlobalInfoApi';
 
-class SelfInfoApi {
+export class SelfInfoApi {
 
   /**
    * Insert selfInfo.
@@ -60,7 +59,8 @@ class SelfInfoApi {
    *
    * @param callback
    */
-  query(callback: Function): void {
+  query(): SelfInfo {
+    return new SelfInfo();
     /*
     let predicates = new relationalStore.RdbPredicates(Const.GLOBAL_INFO.tableName ? Const.GLOBAL_INFO.tableName : '');
     predicates.equalTo('id', 0);

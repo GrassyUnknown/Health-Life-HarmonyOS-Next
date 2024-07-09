@@ -35,8 +35,6 @@ export const MineInfoList: InfoItem[] = [
       router.pushUrl(
         {
           url: 'pages/PersonalData/PersonalDataEdit',
-          params: {
-          }
         }
       )
     }
