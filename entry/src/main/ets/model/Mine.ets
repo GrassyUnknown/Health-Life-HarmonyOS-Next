@@ -22,30 +22,7 @@ export interface InfoItem {
   icon?: Resource;
 }
 
-export class SelfInfo {
-  img: string;
-  name: string;
-  birth: string;
-  gender: string;
-  hobby: string;
-  sig: string;
 
-  constructor(
-    img: string,
-    name: string,
-    birth: string,
-    gender: string,
-    hobby: string,
-    sig: string
-  ) {
-    this.img = img;
-    this.name = name;
-    this.birth = birth;
-    this.gender = gender;
-    this.hobby = hobby;
-    this.sig = sig;
-  }
-}
 /*
 getSelfInfo(){return selfInfo;}; 获取数据
 updateSelfInfo(selfInfo: SelfInfo);  更新数据

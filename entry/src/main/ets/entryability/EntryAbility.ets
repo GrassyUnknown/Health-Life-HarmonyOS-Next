@@ -20,7 +20,8 @@ import {
   columnDayInfoList,
   columnGlobalInfoList,
   columnTaskInfoInfoList,
-  columnFormInfoList
+  columnFormInfoList,
+  columnSelfInfoList
 } from '../model/RdbColumnModel';
 import RdbUtils from '../common/database/rdb/RdbUtils';
 import Logger from '../common/utils/Logger';
@@ -58,6 +59,10 @@ export default class EntryAbility extends UIAbility {
         Logger.error(`RdbHelper taskInfo err : ${JSON.stringify(err)}`);
       });
     RdbUtils.createTable(Const.FORM_INFO.tableName ? Const.FORM_INFO.tableName : '', columnFormInfoList)
+      .catch((err: Error) => {
+        Logger.error(`RdbHelper formInfo err : ${JSON.stringify(err)}`);
+      });
+    RdbUtils.createTable(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '', columnSelfInfoList)
       .catch((err: Error) => {
         Logger.error(`RdbHelper formInfo err : ${JSON.stringify(err)}`);
       });
