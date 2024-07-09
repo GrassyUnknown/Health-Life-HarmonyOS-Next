@@ -49,11 +49,18 @@ export struct TaskCard {
     //   HealthText({ title: '', titleResource: $r('app.string.task_done') })
     // } else {
       Row() {
-        HealthText({
-          title: this.taskInfo.finValue || `--`,
-          fontSize: $r('app.float.default_24')
-        })
-        Text(` / ${this.taskInfo.targetValue} ${TaskMapById[this.taskInfo.taskID - 1].unit}`)
+        if(this.taskInfo.finValue != '') {
+          HealthText({
+
+            title: this.taskInfo.finValue,
+            fontSize: $r('app.float.default_24')
+          })
+          Text(` / `)
+            .labelTextStyle()
+            .fontWeight(Const.FONT_WEIGHT_400)
+        }
+
+        Text(`${this.taskInfo.targetValue} ${TaskMapById[this.taskInfo.taskID - 1].unit} `)
           .labelTextStyle()
           .fontWeight(Const.FONT_WEIGHT_400)
         if (this.taskInfo.isDone){

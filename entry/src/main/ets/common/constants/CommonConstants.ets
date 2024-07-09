@@ -49,6 +49,11 @@ export class CommonConstants {
     tableName: 'formInfo',
     columns: ['id', 'formId', 'formName', 'formDimension']
   } as CommonConstantsInfo
+  /** self info table */
+  static readonly SELF_INFO = {
+    tableName: 'SelfInfo',
+    columns: ['id', 'name', 'img', 'birth', 'gender', 'hobby', 'sig']
+  } as CommonConstantsInfo
   // TaskNum
   static readonly TASK_NUM = 7;
   // THOUSANDTH
