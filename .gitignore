@@ -1,0 +1,9 @@
+.hvigor/
+.idea/
+build/
+entry/build/
+entry/.preview/
+.clang-format
+*.log
+.vscode/
+.env
