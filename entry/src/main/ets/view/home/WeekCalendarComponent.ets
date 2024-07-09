@@ -100,6 +100,7 @@ export struct WeekCalendar {
                   .margin({ top: Const.DEFAULT_2, bottom: $r('app.float.default_4') })
                   .width($r('app.float.default_12'))
                   .color(sameDate(item.date, this.homeStore.showDate) ? $r('app.color.blueColor') : $r('app.color.white'))
+                //渲染进度图片
                 Image(this.getProgressImg(item))
                   .height($r('app.float.default_28'))
                   .objectFit(ImageFit.Contain)
