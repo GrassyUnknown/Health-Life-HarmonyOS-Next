@@ -12,24 +12,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import router from '@ohos.router';
+
 
 export interface InfoItem {
   id: string;
   title: Resource;
+  funct:()=>void;
   icon?: Resource;
 }
 
 export const MineInfoList: InfoItem[] = [
   {
     id: '1',
-    title: $r('app.string.mine_personal_data')
+    title: $r('app.string.mine_personal_data'),
+    funct: ()=>{
+      router.pushUrl(
+        {
+          url: 'pages/PersonalData/PersonalDataEdit'
+        }
+      )
+    }
   },
   {
     id: '2',
-    title: $r('app.string.mine_check_updates')
+    title: $r('app.string.mine_check_updates'),
+    funct: ()=>{}
   },
   {
     id: '3',
-    title: $r('app.string.mine_about')
+    title: $r('app.string.mine_about'),
+    funct: ()=>{}
   }
 ];
