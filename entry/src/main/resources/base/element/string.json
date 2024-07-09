@@ -89,6 +89,10 @@
       "value": "早睡"
     },
     {
+      "name": "task_run",
+      "value": "跑步"
+    },
+    {
       "name": "task_done",
       "value": "已完成"
     },

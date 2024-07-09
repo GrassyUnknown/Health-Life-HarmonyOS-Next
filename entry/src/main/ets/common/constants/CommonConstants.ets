@@ -50,7 +50,7 @@ export class CommonConstants {
     columns: ['id', 'formId', 'formName', 'formDimension']
   } as CommonConstantsInfo
   // TaskNum
-  static readonly TASK_NUM = 6;
+  static readonly TASK_NUM = 7;
   // THOUSANDTH
   static readonly THOUSANDTH_15: string = '1.5%'; // ‘1.5%’
   static readonly THOUSANDTH_12: string = '2.2%'; // ‘2.2%’
@@ -162,6 +162,8 @@ export class CommonConstants {
   static readonly DRINK_MAX_RANGE: number = 500;
   static readonly TIMES_50: number = 50;
   static readonly TIMES_100: number = 100;
+  static readonly RUN_STEP: number = 25;
+  static readonly RUN_MAX_RANGE: number = 1000;
   static readonly EAT_APPLE_RANGE: number = 10;
   static readonly BRUSH_MAX_RANGE: number = 3;
   static readonly SMILE_MAX_RANGE: number = 3;
@@ -197,12 +199,14 @@ export enum TaskType {
   Apple = 'apple',
   Smile = 'smile',
   Clean = 'clean',
-  Sleep = 'sleep'
+  Sleep = 'sleep',
+  Run = 'run'
 }
 
 export enum Unit {
   Liter = 'L',
   Pcs = '个',
   Times = '次',
+  Distance = 'km',
   Empty = ''
 }
