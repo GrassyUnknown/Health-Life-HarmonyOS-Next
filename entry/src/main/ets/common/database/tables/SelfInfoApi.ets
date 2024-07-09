@@ -18,6 +18,8 @@ import SelfInfo from '../../../viewmodel/SelfInfo';
 import { CommonConstants as Const } from '../../constants/CommonConstants'
 import RdbUtils from '../rdb/RdbUtils';
 import Logger from '../../utils/Logger';
+import GlobalInfo from '../../../viewmodel/GlobalInfo';
+import GlobalInfoApi from './GlobalInfoApi';
 
 class SelfInfoApi {
 
@@ -28,11 +30,13 @@ class SelfInfoApi {
    * @param callback
    */
   insertData(selfInfo: SelfInfo, callback: Function): void {
+    /*
     const valueBucket = generateBucket(globalInfo);
     RdbUtils.insert('GlobalInfo', valueBucket).then(result => {
       callback(result);
     });
     Logger.info('GlobalInfoTable', 'Insert globalInfo finished.');
+    */
   }
 
   /**
@@ -57,6 +61,7 @@ class SelfInfoApi {
    * @param callback
    */
   query(callback: Function): void {
+    /*
     let predicates = new relationalStore.RdbPredicates(Const.GLOBAL_INFO.tableName ? Const.GLOBAL_INFO.tableName : '');
     predicates.equalTo('id', 0);
     RdbUtils.query(predicates).then(resultSet => {
@@ -75,6 +80,7 @@ class SelfInfoApi {
         callback(result);
       }
     });
+    */
   }
 }
 
@@ -105,6 +111,6 @@ function generateBucket(globalInfo: GlobalInfo): relationalStore.ValuesBucket {
   return valueBucket;
 }
 
-let globalInfoApi = new GlobalInfoApi();
+//let globalInfoApi = new GlobalInfoApi();
 
-export default globalInfoApi as GlobalInfoApi;
+//export default globalInfoApi as GlobalInfoApi;

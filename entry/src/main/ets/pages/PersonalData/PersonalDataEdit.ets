@@ -1,5 +1,4 @@
 import Context from '@ohos.app.ability.common';
-
 @Component
 struct TextFrame{
   @Link content: string;
