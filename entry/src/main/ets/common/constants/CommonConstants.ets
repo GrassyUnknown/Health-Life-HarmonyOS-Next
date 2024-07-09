@@ -163,6 +163,8 @@ export class CommonConstants {
   static readonly TIMES_50: number = 50;
   static readonly TIMES_100: number = 100;
   static readonly EAT_APPLE_RANGE: number = 100;
+  static readonly BRUSH_MAX_RANGE: number = 3;
+  static readonly SMILE_MAX_RANGE: number = 3;
   // letter spacing
   static readonly LETTER_1: number = 0.1;
   static readonly LETTER_34: number = 3.4;
