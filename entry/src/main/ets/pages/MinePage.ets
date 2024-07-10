@@ -33,12 +33,7 @@ export struct MineIndex {
         nickname: $nickname,
         signature: $signature
       });
-
-      ListInfo({
-        img: $img,
-        nickname: $nickname,
-        signature: $signature
-      });
+      ListInfo();
     }
     .height(Const.FULL_HEIGHT)
     .backgroundColor($r('app.color.mineBgColor'))

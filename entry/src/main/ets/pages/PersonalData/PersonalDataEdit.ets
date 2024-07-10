@@ -276,7 +276,7 @@ struct PersonalEditIndex {
           .alignSelf(ItemAlign.Center)
           .margin({ top: '5.5%' })
           .onClick(()=>{
-            this.idx = (this.idx + 1) % 2
+            this.idx = (this.idx + 1) % this.selectImg.length
             this.img = this.selectImg[this.idx]
             console.info('img='+this.img)
           })
