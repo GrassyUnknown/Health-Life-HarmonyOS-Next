@@ -69,7 +69,7 @@ export struct TaskCard {
             .fontColor($r('app.color.proGressColor'))
             .fontSize($r('app.float.default_18'))
             .fontWeight(Const.FONT_WEIGHT_700)}else{
-          Progress({ value: Number(this.taskInfo.finValue), total: Number(this.taskInfo.targetValue), type: ProgressType.ScaleRing })
+          Progress({ value: Number(this.taskInfo.finValue)*100, total: Number(this.taskInfo.targetValue)*100, type: ProgressType.ScaleRing })
             .width($r('app.float.default_36')).height($r('app.float.default_36'))
             .color($r('app.color.proGressColor'))
             .backgroundColor($r('app.color.proGressBgColor'))
