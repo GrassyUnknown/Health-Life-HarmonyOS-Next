@@ -171,8 +171,14 @@ struct PersonalEditIndex {
       range: sexArray,
       selected: this.selectedGender,
       onAccept: (result: TextPickerResult) => {
-        sexCallback(result.value[0]);
-        this.selectedGender = result.index[0]
+        if(typeof result.value === 'string') {
+          sexCallback(result.value);
+          this.selectedGender = result.index[0]
+        } else {
+          sexCallback(result.value[0]);
+          this.selectedGender = result.index[0]
+        }
+
       },
       onCancel: () => {
         console.info('TextPickerDialog onCancel');
@@ -209,7 +215,7 @@ struct PersonalEditIndex {
             .onClick(() => {
               let context = getContext(this) as Context.UIAbilityContext;
               this.alertDialog(context, ()=>{
-                router.back(
+                router.pushUrl(
                   {
                     url: 'pages/MainPage',
                     params: {
@@ -228,7 +234,11 @@ struct PersonalEditIndex {
             Text('保存')
               .fontColor(Color.Green)
               .fontSize(20)
-              .margin({ top: 20,left:20 })
+              .margin({
+                top: 20,
+                left:20,
+                right: 30
+              })
               .alignSelf(ItemAlign.Center)
               .onClick(()=>{
                 let selfInfo = new SelfInfo(
@@ -247,11 +257,16 @@ struct PersonalEditIndex {
             Text('保存')
               .fontColor(Color.Black)
               .fontSize(20)
-              .margin({ top: 20,left:20 })
+              .margin({
+                top: 20,
+                left:20,
+                right: 30
+              })
               .alignSelf(ItemAlign.Center)
           }
         }
         .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
 
         Image($r('app.media.per_name'))
           .width(56)
