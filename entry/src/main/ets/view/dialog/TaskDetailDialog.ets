@@ -18,6 +18,7 @@ import TaskInfo from '../../viewmodel/TaskInfo';
 import { TaskMapById } from '../../model/TaskInitList';
 import { CommonConstants as Const } from '../../common/constants/CommonConstants';
 import { GlobalContext } from '../../common/utils/GlobalContext';
+import { CJCalendar, CJDateItem, OptMode, SelectedStyle } from 'cjcalendar'
 
 @Extend(Text)
 function textStyle() {
@@ -89,6 +90,16 @@ struct TaskBaseInfo {
 
 @Component
 struct TaskClock {
+  // @Builder cellLayout(item: CJDateItem) {
+  //   Column() {
+  //     Text(item.date + "")
+  //       .fontSize(18)
+  //       .fontColor(item.isPre || item.isNext ? "#CCCCCC" : "#323232")
+  //     Text("你好")
+  //       .fontSize(12)
+  //   }
+  // }
+  //item: CJDateItem = new CJDateItem(new Date())
   confirm: Function = () => {
   };
   cancel: Function = () => {
@@ -97,6 +108,15 @@ struct TaskClock {
 
   build() {
     Column({ space: Const.DEFAULT_12 }) {
+    //Column() {
+      //CJCalendar()//日历
+      CJCalendar({
+        defSelectedItems:[
+          "2024-07-08",
+          "2024-07-09",
+          "2024-07-10",
+        ]
+      })
       Button() {
         Text($r('app.string.clock_in'))
           .height($r('app.float.default_42'))
@@ -112,7 +132,6 @@ struct TaskClock {
         this.confirm();
       })
       .visibility(!this.showButton ? Visibility.None : Visibility.Visible)
-
       Text($r('app.string.got_it'))
         .fontSize($r('app.float.default_14'))
         .fontWeight(FontWeight.Regular)
@@ -120,9 +139,7 @@ struct TaskClock {
         .onClick(() => {
           this.cancel();
         })
-    }
+    }.alignItems(HorizontalAlign.Center).justifyContent(FlexAlign.Center)
   }
 }
-
-
 

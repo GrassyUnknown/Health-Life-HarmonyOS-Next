@@ -28,7 +28,6 @@ export function getAchievementLevel() {
       AppStorage.set<Number>(ACHIEVEMENT_LEVEL_KEY, Number(achievements[achievements.length - 1]));
     }
   })
-
 }
 
 export function isReachNewAchievement(globalInfo: GlobalInfo): boolean {

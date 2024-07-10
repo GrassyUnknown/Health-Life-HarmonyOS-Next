@@ -30,6 +30,7 @@ import { HomeStore } from '../viewmodel/HomeViewModel';
 import GlobalInfoApi from '../common/database/tables/GlobalInfoApi';
 import GlobalInfo from '../viewmodel/GlobalInfo';
 import { GlobalContext } from '../common/utils/GlobalContext';
+import { selfInfo } from '../entryability/EntryAbility';
 
 @Styles
 function allSize() {
@@ -48,6 +49,9 @@ struct Index {
   @State editedTaskID: string = '0';
   @State homeStore: HomeStore = new HomeStore(new Date());
   private tabController: TabsController = new TabsController();
+  @State nickname: string = selfInfo.name;
+  @State signature: string = selfInfo.birth + ',' + selfInfo.hobby + ',' + selfInfo.sig;
+  @State img: string = 'app.media.head_boy'
 
   aboutToAppear() {
     notificationManager.requestEnableNotification().then(() => {
@@ -60,6 +64,9 @@ struct Index {
   onPageShow() {
     // 核心数据相关都在这儿
     // 每次进导航页
+    this.nickname = selfInfo.name == '' ? '点燃星海' : selfInfo.name
+    this.img = selfInfo.img == '' ? 'app.media.head_boy' : this.img
+    this.signature = selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig
     Logger.info('onPageShow', JSON.stringify(router.getParams()));
     let params = (router.getParams() ? router.getParams() : {}) as Record<string, Object>;
     let result = params.editTask ? params.editTask as string : '{}';
@@ -138,7 +145,11 @@ struct Index {
       .tabBar(this.TabBuilder(TabId.ACHIEVEMENT))
 
       TabContent() {
-        MineIndex()
+        MineIndex({
+          nickname: $nickname,
+          signature: $signature,
+          img: $img
+        })
           .borderWidth({ bottom: 1 })
           .borderColor($r('app.color.primaryBgColor'))
       }

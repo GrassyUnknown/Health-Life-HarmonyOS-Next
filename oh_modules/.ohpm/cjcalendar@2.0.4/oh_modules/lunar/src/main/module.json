@@ -1,0 +1,19 @@
+{
+	"app": {
+		"bundleName": "com.example.myapplication",
+		"debug": true,
+		"versionCode": 1000000,
+		"versionName": "1.0.0",
+		"minAPIVersion": 9,
+		"targetAPIVersion": 9,
+		"apiReleaseType": "Release"
+	},
+	"module": {
+		"name": "lunar",
+		"type": "har",
+		"deviceTypes": [
+			"default",
+			"tablet"
+		]
+	}
+}

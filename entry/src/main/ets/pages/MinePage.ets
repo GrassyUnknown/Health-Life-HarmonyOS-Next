@@ -22,23 +22,17 @@ import SelfInfo from '../viewmodel/SelfInfo';
 
 @Component
 export struct MineIndex {
-  @State nickname: string = selfInfo.name;
-  @State signature: string = selfInfo.birth + ',' + selfInfo.hobby + ',' + selfInfo.sig;
+  @Link nickname: string;
+  @Link signature: string;
+  @Link img: string;
 
-  aboutToAppear(): void {
-    if(router.getParams() != null) {
-      let selfInfos:SelfInfo = (router.getParams() as Record<string, SelfInfo>)['selfInfo']
-      this.nickname = selfInfos.name
-      this.signature = selfInfos.birth + ',' + selfInfos.hobby + ',' + selfInfos.sig
-    }
-  }
   build() {
     Column() {
       UserBaseInfo({
-        nickname: this.nickname,
-        signature: this.signature
+        img: $img,
+        nickname: $nickname,
+        signature: $signature
       });
-
       ListInfo();
     }
     .height(Const.FULL_HEIGHT)
