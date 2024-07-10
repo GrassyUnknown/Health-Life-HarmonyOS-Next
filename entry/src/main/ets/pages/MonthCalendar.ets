@@ -96,6 +96,15 @@ struct MonthCalendar {
     //.backgroundImage($r('app.media.ic_ad_bg'))
     //.backgroundImageSize({ width: '100%', height: '100%' })
     .justifyContent(FlexAlign.SpaceBetween)
+      Row() {
+        Image($r('app.media.comment'))
+          .width($r('app.float.default_100')) // 假设这是你想要的图像宽度
+          .height($r('app.float.default_40')) // 假设这是你想要的图像高度)
+      }
+      .position({ x: '65%', y: '56%'})
+      .width($r('app.float.default_316'))
+      .height($r('app.float.default_100'))
+      .width('100%')
     }
   }
 }}
