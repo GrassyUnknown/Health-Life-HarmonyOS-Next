@@ -76,52 +76,52 @@ struct ItemCell {
         // 主题内容
         this.CellMain()
       }
-      .onClick(() => {
-
-        if ((!this.cjDataItem.isPre && !this.cjDataItem.isNext) ||
-          (this.cjDataItem.isPre && this.cjCalStatus.hasPre) ||
-          (this.cjDataItem.isNext && this.cjCalStatus.hasNext)) {
-
-          if (this.optMode == OptMode.NORMAL) { // 正常
-
-            this.selectedItems[0] = this.cjDataItem
-            // this.cjDataItem.date = 66
-          } else if (this.optMode == OptMode.SINGLE) { // 单选
-
-            this.selectedItems[0] = this.cjDataItem
-
-          } else if (this.optMode == OptMode.MULTIPLE) { //多选
-
-            const index = this.containsItem(this.cjDataItem)
-            if (index >= 0) {
-              this.selectedItems.splice(index, 1)
-            } else {
-              this.selectedItems.push(this.cjDataItem)
-            }
-
-          } else if (this.optMode == OptMode.RANGE) { //范围
-
-            if (this.selectedItems.length == 0) { //一个没选
-              this.selectedItems.push(this.cjDataItem)
-            } else if (this.selectedItems.length == 1) { // 选了一个
-              if (this.cjDataItem.bigThan(this.selectedItems[0])) {
-                this.selectedItems.push(this.cjDataItem)
-              } else {
-                this.selectedItems.splice(0, 0, this.cjDataItem)
-              }
-
-            } else if (this.selectedItems.length == 2) { // 选了两个
-              this.selectedItems.splice(0, 2)
-              this.selectedItems.push(this.cjDataItem)
-            }
-
-          }
-
-        }
-
-        // 回调点击
-        this.cellClick(this.cjDataItem)
-      })
+      // .onClick(() => {
+      //
+      //   if ((!this.cjDataItem.isPre && !this.cjDataItem.isNext) ||
+      //     (this.cjDataItem.isPre && this.cjCalStatus.hasPre) ||
+      //     (this.cjDataItem.isNext && this.cjCalStatus.hasNext)) {
+      //
+      //     if (this.optMode == OptMode.NORMAL) { // 正常
+      //
+      //       this.selectedItems[0] = this.cjDataItem
+      //       // this.cjDataItem.date = 66
+      //     } else if (this.optMode == OptMode.SINGLE) { // 单选
+      //
+      //       this.selectedItems[0] = this.cjDataItem
+      //
+      //     } else if (this.optMode == OptMode.MULTIPLE) { //多选
+      //
+      //       const index = this.containsItem(this.cjDataItem)
+      //       if (index >= 0) {
+      //         this.selectedItems.splice(index, 1)
+      //       } else {
+      //         this.selectedItems.push(this.cjDataItem)
+      //       }
+      //
+      //     } else if (this.optMode == OptMode.RANGE) { //范围
+      //
+      //       if (this.selectedItems.length == 0) { //一个没选
+      //         this.selectedItems.push(this.cjDataItem)
+      //       } else if (this.selectedItems.length == 1) { // 选了一个
+      //         if (this.cjDataItem.bigThan(this.selectedItems[0])) {
+      //           this.selectedItems.push(this.cjDataItem)
+      //         } else {
+      //           this.selectedItems.splice(0, 0, this.cjDataItem)
+      //         }
+      //
+      //       } else if (this.selectedItems.length == 2) { // 选了两个
+      //         this.selectedItems.splice(0, 2)
+      //         this.selectedItems.push(this.cjDataItem)
+      //       }
+      //
+      //     }
+      //
+      //   }
+      //
+      //   // 回调点击
+      //   this.cellClick(this.cjDataItem)
+      // })
     }
   }
 
@@ -653,28 +653,28 @@ export struct CJCalendar {
               // },
               buildCellBackground: this.buildCellBackground,
               buildCellBody: this.buildCellBody,
-              cellClick: (cellItem: CJDateItem) => {
-                if (cellItem.isPre) {
-                  this.controller.preMonth()
-                } else if (cellItem.isNext) {
-                  this.controller.nextMonth()
-                }
-                if (cellItem.smallThan(new CJDateItem(this.startDate)) ||
-                cellItem.bigThan(new CJDateItem(this.endDate))) {
-                  if (this.onDisableCellItemClick) {
-                    this.onDisableCellItemClick(cellItem)
-                  } else {
-                    if (this.onCellItemClick) {
-                      this.onCellItemClick(cellItem)
-                    }
-                  }
-                } else {
-                  if (this.onCellItemClick) {
-                    this.onCellItemClick(cellItem)
-                  }
-                }
-                this.onSelectedChanged(this.selectedItems)
-              }
+              // cellClick: (cellItem: CJDateItem) => {
+              //   if (cellItem.isPre) {
+              //     this.controller.preMonth()
+              //   } else if (cellItem.isNext) {
+              //     this.controller.nextMonth()
+              //   }
+              //   if (cellItem.smallThan(new CJDateItem(this.startDate)) ||
+              //   cellItem.bigThan(new CJDateItem(this.endDate))) {
+              //     if (this.onDisableCellItemClick) {
+              //       this.onDisableCellItemClick(cellItem)
+              //     } else {
+              //       if (this.onCellItemClick) {
+              //         this.onCellItemClick(cellItem)
+              //       }
+              //     }
+              //   } else {
+              //     if (this.onCellItemClick) {
+              //       this.onCellItemClick(cellItem)
+              //     }
+              //   }
+              //   this.onSelectedChanged(this.selectedItems)
+              // }
             })
               .width("14.28%")
               .margin({ bottom: this.calStyle.rowSpace })

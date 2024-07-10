@@ -19,6 +19,7 @@ import { TaskMapById } from '../../model/TaskInitList';
 import { CommonConstants as Const } from '../../common/constants/CommonConstants';
 import { GlobalContext } from '../../common/utils/GlobalContext';
 import { CJCalendar, CJDateItem, OptMode, SelectedStyle } from 'cjcalendar'
+import { HomeStore } from '../../viewmodel/HomeViewModel';
 
 @Extend(Text)
 function textStyle() {
@@ -34,6 +35,7 @@ function taskTextStyle() {
 
 @CustomDialog
 export struct TaskDetailDialog {
+  @Link homeStore: HomeStore;
   controller: CustomDialogController = new CustomDialogController({ builder: '' });
   @Consume currentTask: TaskInfo;
   @State showButton: boolean = true;
@@ -46,6 +48,8 @@ export struct TaskDetailDialog {
       });
 
       TaskClock({
+        curTaskID:this.currentTask?.taskID,
+        myMonthHomeStore:this.homeStore,
         confirm: () => {
           this.dialogCallBack.confirmCallback(this.currentTask);
           this.controller.close();
@@ -90,6 +94,9 @@ struct TaskBaseInfo {
 
 @Component
 struct TaskClock {
+  // curTask:TaskInfo=new TaskInfo(0, '', 0, '', false, '', '', '', false, '');
+  curTaskID:number=0;
+  myMonthHomeStore:HomeStore=  new HomeStore(new Date());
   // @Builder cellLayout(item: CJDateItem) {
   //   Column() {
   //     Text(item.date + "")
@@ -106,16 +113,25 @@ struct TaskClock {
   };
   showButton: boolean = false;
 
+
+  getAchieveDate() {
+    let selectedItems: Array<string | Date> = [];
+
+    for (let myMonthHomeStoreElement of this.myMonthHomeStore.dateArr) {
+      if(myMonthHomeStoreElement.taskList.length!=0 && this.curTaskID < myMonthHomeStoreElement.taskList.length && myMonthHomeStoreElement.taskList[this.curTaskID].isDone)
+      // if( myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
+        selectedItems.push(myMonthHomeStoreElement.date)
+
+    }
+    return selectedItems;
+  }
+
   build() {
     Column({ space: Const.DEFAULT_12 }) {
     //Column() {
       //CJCalendar()//日历
       CJCalendar({
-        defSelectedItems:[
-          "2024-07-08",
-          "2024-07-09",
-          "2024-07-10",
-        ]
+        defSelectedItems: this.getAchieveDate()
       })
       Button() {
         Text($r('app.string.clock_in'))

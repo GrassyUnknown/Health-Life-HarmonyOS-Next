@@ -42,8 +42,6 @@ struct MonthCalendar {
   }
   selectedItems: Array<string | Date> = [];
   aboutToAppear() {
-    console.log(this.myMonthHomeStore.dateTitle)
-
     for (let myMonthHomeStoreElement of this.myMonthHomeStore.dateArr) {
       if( myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
         this.selectedItems.push(myMonthHomeStoreElement.date)
