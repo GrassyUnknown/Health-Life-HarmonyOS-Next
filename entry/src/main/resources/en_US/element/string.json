@@ -31,6 +31,182 @@
     {
       "name": "empty",
       "value": "empty"
+    },
+    {
+      "name": "tab_home",
+      "value": "Home"
+    },
+    {
+      "name": "mine_personal_data",
+      "value": "Personal Data"
+    },
+    {
+      "name": "mine_check_updates",
+      "value": "Update"
+    },
+    {
+      "name": "mine_about",
+      "value": "About"
+    },
+    {
+      "name": "mine_introduce",
+      "value": "Introduction"
+    },
+    {
+      "name": "clock_in",
+      "value": "Finish"
+    },
+    {
+      "name": "got_it",
+      "value": "Got it"
+    },
+    {
+      "name": "tab_achievement",
+      "value": "Acheivement"
+    },
+    {
+      "name": "achievement",
+      "value": "Acheivement"
+    },
+    {
+      "name": "tab_mine",
+      "value": "My"
+    },
+    {
+      "name": "task_list",
+      "value": "Tasklist"
+    },
+    {
+      "name": "no_task",
+      "value": "No task"
+    },
+    {
+      "name": "task_morning",
+      "value": "Wake up early"
+    },
+    {
+      "name": "task_apple",
+      "value": "Eat apple"
+    },
+    {
+      "name": "task_water",
+      "value": "Drink water"
+    },
+    {
+      "name": "task_smile",
+      "value": "Smile daily"
+    },
+    {
+      "name": "task_brush",
+      "value": "Brush daily"
+    },
+    {
+      "name": "task_night",
+      "value": "Sleep early"
+    },
+    {
+      "name": "task_run",
+      "value": "Run"
+    },
+    {
+      "name": "task_done",
+      "value": "Done"
+    },
+    {
+      "name": "task_achievement_level",
+      "value": "Achieve for %d days"
+    },
+    {
+      "name": "task_achievement_single_drink_task",
+      "value": "Drink water %d%"
+    },
+    {
+      "name": "task_achievement_single_apple_task",
+      "value": "Eat apples %d%"
+    },
+    {
+      "name": "task_achievement_single_smile_task",
+      "value": "Smile %d%"
+    },
+    {
+      "name": "task_achievement_single_brush_task",
+      "value": "Brush %d%"
+    },
+    {
+      "name": "task_achievement_single_morning_task",
+      "value": "Wake up early %d%"
+    },
+    {
+      "name": "task_achievement_single_sleep_task",
+      "value": "Sleep early %d%"
+    },
+    {
+      "name": "already_open",
+      "value": "Already open"
+    },
+    {
+      "name": "target_setting",
+      "value": "Target setting"
+    },
+    {
+      "name": "open_reminder",
+      "value": "Open reminder"
+    },
+    {
+      "name": "remind_time",
+      "value": "Remind time"
+    },
+    {
+      "name": "frequency",
+      "value": "Frequency"
+    },
+    {
+      "name": "complete",
+      "value": "Complete"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "confirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "set_your_frequency",
+      "value": "Set your frequency"
+    },
+    {
+      "name": "target_progress",
+      "value": "Target progress"
+    },
+    {
+      "name": "sure",
+      "value": "Sure"
+    },
+    {
+      "name": "privacy_title",
+      "value": "Open privacy authority"
+    },
+    {
+      "name": "privacy_desc",
+      "value": "Support"
+    },
+    {
+      "name": "jump_ad",
+      "value": "Skip Ad %ds"
+    },
+    {
+      "name": "alert",
+      "value": "Alert"
+    },
+    {
+      "name": "alert_message",
+      "value": "Your date is earlier than the newest date"
+    },
+    {
+      "name": "alert_button",
+      "value": "Quit"
     }
   ]
 }
