@@ -45,7 +45,7 @@ struct MonthCalendar {
     console.log(this.myMonthHomeStore.dateTitle)
 
     for (let myMonthHomeStoreElement of this.myMonthHomeStore.dateArr) {
-      if(myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
+      if(myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
         this.selectedItems.push(myMonthHomeStoreElement.date)
 
     }
@@ -97,7 +97,16 @@ struct MonthCalendar {
     //.backgroundImagePosition({ x: 0, y: 0 })
     //.backgroundImage($r('app.media.ic_ad_bg'))
     //.backgroundImageSize({ width: '100%', height: '100%' })
-    .justifyContent(FlexAlign.SpaceBetween)
+    // .justifyContent(FlexAlign.SpaceBetween)
+      Row() {
+        Image($r('app.media.comment'))
+          .width($r('app.float.default_100')) // 假设这是你想要的图像宽度
+          .height($r('app.float.default_40')) // 假设这是你想要的图像高度)
+      }
+      .position({ x: '65%', y: '56%'})
+      .width($r('app.float.default_316'))
+      .height($r('app.float.default_100'))
+    .width('100%')
     }
   }
 }}
