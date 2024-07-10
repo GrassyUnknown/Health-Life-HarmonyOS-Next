@@ -234,7 +234,11 @@ struct PersonalEditIndex {
             Text('保存')
               .fontColor(Color.Green)
               .fontSize(20)
-              .margin({ top: 20,left:20 })
+              .margin({
+                top: 20,
+                left:20,
+                right: 30
+              })
               .alignSelf(ItemAlign.Center)
               .onClick(()=>{
                 let selfInfo = new SelfInfo(
@@ -253,11 +257,16 @@ struct PersonalEditIndex {
             Text('保存')
               .fontColor(Color.Black)
               .fontSize(20)
-              .margin({ top: 20,left:20 })
+              .margin({
+                top: 20,
+                left:20,
+                right: 30
+              })
               .alignSelf(ItemAlign.Center)
           }
         }
         .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
 
         Image($r('app.media.per_name'))
           .width(56)
