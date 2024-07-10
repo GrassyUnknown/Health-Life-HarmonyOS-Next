@@ -78,32 +78,44 @@ export struct WeekCalendar {
     WeekCalendarMethods.goToNextWeek(this.currentPage, this.isPageScroll, this.homeStore, this.scroller) :
     WeekCalendarMethods.gotoPreviousWeek(this.isPageScroll, this.homeStore, this.currentPage, this.scroller))
   }
+  @Builder
+  ArrowNextMonth(isShow:boolean) {
+    Row() {
+      if(isShow){
+      Image($r('app.media.ic_month1'))
+        .width($r('app.float.default_36'))
+        .height($r('app.float.default_24'))}
+      else{
+        Image($r('app.media.ic_month0'))
+          .width($r('app.float.default_36'))
+          .height($r('app.float.default_24'))
+      }
+    }
+    .width($r('app.float.default_56'))
+    .height($r('app.float.default_28'))
+    .justifyContent(FlexAlign.Center)
+    .onClick(() => {
+      if(isShow){
+      console.info(`Succeeded in clicking the 'Next' button.`)
+      router.pushUrl({
+        url: 'pages/MonthCalendar',
+        params: { params: JSON.stringify(this.homeStore) }
+      })}
 
+
+
+  })}
   build() {
     Row() {
       Column() {
         Row() {
+          this.ArrowNextMonth(false)
           this.ArrowIcon(false) // 箭头
           HealthText({ title: this.homeStore.dateTitle, fontSize: $r('app.float.default_14') })
             .margin($r('app.float.default_12'))
           this.ArrowIcon(true)
-          // Button({ type: ButtonType.Circle, stateEffect: true }) {
-          //   LoadingProgress().width(30).height(20).color(0xFFFFFF)
-          // }.width(55).height(55).margin({ left: 20 }).backgroundColor(0xF55A42)
-          // .onClick(()=>{
-          //
-          //   // router.pushUrl({
-          //   //   url: 'pages/MonthCalendar',
-          //   //   params: {
-          //   //     data1: 'message',
-          //   //     data2: {
-          //   //       data3: [123, 456, 789]
-          //   //     }
-          //   //   }
-          //   // })
-          // })
-        }
-        .justifyContent(FlexAlign.Center)
+          this.ArrowNextMonth(true)
+        }.justifyContent(FlexAlign.Center)
 
         Scroll(this.scroller) {
           Row() {// 周历

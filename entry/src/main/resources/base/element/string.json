@@ -98,7 +98,7 @@
     },
     {
       "name": "task_done",
-      "value": "已完成"
+      "value": "√"
     },
     {
       "name": "task_achievement_level",
@@ -191,6 +191,10 @@
     {
       "name": "sure",
       "value": "确定"
+    },
+    {
+      "name": "retHome",
+      "value": "返回首页"
     },
     {
       "name": "privacy_title",

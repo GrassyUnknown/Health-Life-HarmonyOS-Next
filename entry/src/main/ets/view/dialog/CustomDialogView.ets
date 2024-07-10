@@ -19,6 +19,7 @@ import { BroadCast, BroadCastType } from '../../common/utils/BroadCast';
 import { TaskItem } from '../../model/TaskInitList';
 import TaskInfo from '../../viewmodel/TaskInfo';
 import Logger from '../../common/utils/Logger';
+import { HomeStore } from '../../viewmodel/HomeViewModel';
 
 export class CustomDialogCallback {
   confirmCallback: Function = () => {
@@ -29,6 +30,7 @@ export class CustomDialogCallback {
 
 @Component
 export struct CustomDialogView {
+  @Link homeStore:HomeStore;
   @State isShow: boolean = false;
   @Provide achievementLevel: number = 0;
   @Consume broadCast: BroadCast;
@@ -42,7 +44,7 @@ export struct CustomDialogView {
   });
   // task clock dialog
   taskDialog: CustomDialogController = new CustomDialogController({
-    builder: TaskDetailDialog(),
+    builder: TaskDetailDialog({ homeStore: $homeStore }),
     autoCancel: true,
     customStyle: true
   });

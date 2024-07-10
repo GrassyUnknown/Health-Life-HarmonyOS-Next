@@ -60,11 +60,21 @@ export struct TaskCard {
             .fontWeight(Const.FONT_WEIGHT_400)
         }
 
-        Text(`${this.taskInfo.targetValue} ${TaskMapById[this.taskInfo.taskID - 1].unit} `)
+        Text(`${this.taskInfo.targetValue} ${TaskMapById[this.taskInfo.taskID - 1].unit}   `)
           .labelTextStyle()
           .fontWeight(Const.FONT_WEIGHT_400)
+
         if (this.taskInfo.isDone){
-        HealthText({ title: '', titleResource: $r('app.string.task_done') })}
+          Text($r('app.string.task_done'))
+            .fontColor($r('app.color.proGressColor'))
+            .fontSize($r('app.float.default_18'))
+            .fontWeight(Const.FONT_WEIGHT_700)}else{
+          Progress({ value: Number(this.taskInfo.finValue), total: Number(this.taskInfo.targetValue), type: ProgressType.ScaleRing })
+            .width($r('app.float.default_36')).height($r('app.float.default_36'))
+            .color($r('app.color.proGressColor'))
+            .backgroundColor($r('app.color.proGressBgColor'))
+            .style({ strokeWidth: 15, scaleCount: 20, scaleWidth: 9 })
+        }
     }
   }
 

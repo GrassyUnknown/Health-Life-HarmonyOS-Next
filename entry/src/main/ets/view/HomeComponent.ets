@@ -187,7 +187,7 @@ export default struct HomeIndex {
       .position({ x: 0, y: 0 })
       .backgroundColor(`rgba(${WHITE_COLOR_0X},${WHITE_COLOR_0X},${WHITE_COLOR_0X},${this.naviAlpha})`)
 
-      CustomDialogView()
+      CustomDialogView({homeStore:$homeStore})
     }
     .allSize()
     .backgroundColor($r('app.color.primaryBgColor'))
