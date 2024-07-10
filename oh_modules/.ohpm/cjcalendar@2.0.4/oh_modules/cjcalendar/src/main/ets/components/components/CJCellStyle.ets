@@ -18,7 +18,7 @@ export class CJCellStyle {
   selectFontSize?: number | string | Resource = 20
   // 选中日期背景颜色, 默认与todayFontColor一致
   itemBackgroundColor?: ResourceColor = "#00000000"
-  selectItemBackgroundColor?: string = "#03A9F4"
+  selectItemBackgroundColor?: string = "#fff403cc"
   /**
    * RANGE 模式下生效，中间区域颜色变淡比例，范围：0-1
    */
