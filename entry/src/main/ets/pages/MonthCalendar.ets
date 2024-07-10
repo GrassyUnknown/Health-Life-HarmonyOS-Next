@@ -16,22 +16,41 @@
 import { router } from '@kit.ArkUI';
 import { CommonConstants as Const } from '../common/constants/CommonConstants';
 import { CJCalendar, OptMode, SelectedStyle } from 'cjcalendar'
+import { HomeStore } from '../viewmodel/HomeViewModel';
 
 @Entry
 @Component
 struct MonthCalendar {
+  @Provide @Watch('onParamsChanged') myMonthHomeStore: HomeStore = this.parseRouterParams();
   @State duration: number = Const.AD_DURATION;
   private intervalId: number = -1;
+  private isChanged: boolean = false;
 
   goToHomePage() {
     clearInterval(this.intervalId);
     router.back({
       url: 'pages/MainPage'
   })}
-
-  aboutToAppear() {
-
+  // 每次改变任务参数时触发
+  onParamsChanged() {
+    this.isChanged = true;
   }
+  parseRouterParams() {
+    let params = router.getParams() as Record<string, Object>;
+    const routerParams: HomeStore = JSON.parse(params.params as string);
+    return routerParams;
+  }
+  selectedItems: Array<string | Date> = [];
+  aboutToAppear() {
+    console.log(this.myMonthHomeStore.dateTitle)
+
+    for (let myMonthHomeStoreElement of this.myMonthHomeStore.dateArr) {
+      if( myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
+        this.selectedItems.push(myMonthHomeStoreElement.date)
+
+    }
+  }
+
 
   build() {
     Row(){
@@ -69,7 +88,9 @@ struct MonthCalendar {
       .width('100%')
       // .justifyContent()
       Row() {
-        CJCalendar().height("100%")
+        CJCalendar({
+          defSelectedItems: this.selectedItems
+        }).height("100%")
       }
     .width('100%')
     .height('100%')

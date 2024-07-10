@@ -99,12 +99,7 @@ export struct WeekCalendar {
       console.info(`Succeeded in clicking the 'Next' button.`)
       router.pushUrl({
         url: 'pages/MonthCalendar',
-        params: {
-          data1: 'message',
-          data2: {
-            data3: [123, 456, 789]
-          }
-        }
+        params: { params: JSON.stringify(this.homeStore) }
       })}
 
 
