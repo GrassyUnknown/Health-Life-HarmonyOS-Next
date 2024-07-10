@@ -118,10 +118,12 @@ struct TaskClock {
     let selectedItems: Array<string | Date> = [];
 
     for (let myMonthHomeStoreElement of this.myMonthHomeStore.dateArr) {
-      if(myMonthHomeStoreElement.taskList.length!=0 && this.curTaskID < myMonthHomeStoreElement.taskList.length && myMonthHomeStoreElement.taskList[this.curTaskID].isDone)
-      // if( myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
-        selectedItems.push(myMonthHomeStoreElement.date)
-
+      if(myMonthHomeStoreElement.taskList.length!=0  ) {
+        // if( myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
+        for(let task of myMonthHomeStoreElement.taskList){
+          if(task.taskID==this.curTaskID && task.isDone)selectedItems.push(myMonthHomeStoreElement.date)
+        }
+      }
     }
     return selectedItems;
   }
