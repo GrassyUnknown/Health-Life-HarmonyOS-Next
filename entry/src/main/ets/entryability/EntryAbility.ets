@@ -71,7 +71,10 @@ export default class EntryAbility extends UIAbility {
         Logger.error(`RdbHelper formInfo err : ${JSON.stringify(err)}`);
       });
     console.info('insert to SelfInfo')
-    SelfInfoApi.insertData(new SelfInfo('img','xzai','2021-02-02','男','hobbies','sigs'));
+    SelfInfoApi.insertData(new SelfInfo('img','xzai','2021-02-02','男','hobbies','sigs'),(isDone: number) => {
+      if (isDone) {
+        Logger.info('EntryAbility' + 'Insert selfInfo success');
+      }});
   }
   // UI页面管理器
   onWindowStageCreate(windowStage: window.WindowStage) {

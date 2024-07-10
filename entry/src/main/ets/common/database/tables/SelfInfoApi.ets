@@ -28,11 +28,11 @@ export class SelfInfoApi {
    * @param selfInfo
    * @param callback
    */
-  insertData(selfInfo: SelfInfo): void {
+  insertData(selfInfo: SelfInfo, callback : Function): void {
     const valueBucket = generateBucket(selfInfo);
     RdbUtils.insert('SelfInfo', valueBucket).then(result => {
-      Logger.info('SelfInfoTable', 'Insert selfInfo finished with code', result.toString());
-      return result;
+      Logger.info('SelfInfoTable' + 'Insert selfInfo finished');
+      callback(result);
     });
   }
 
@@ -42,15 +42,14 @@ export class SelfInfoApi {
    * @param selfInfo
    * @param callback
    */
-  updateData(selfInfo: SelfInfo): number {
+  updateData(selfInfo: SelfInfo, callback : Function): void {
     const valueBucket = generateBucket(selfInfo);
     let predicates: relationalStore.RdbPredicates = new relationalStore.RdbPredicates(Const.SELF_INFO.tableName ? Const.SELF_INFO.tableName : '');
     predicates.equalTo('id', 0);
     RdbUtils.update(valueBucket, predicates).then((result: number) => {
-      Logger.info('SelfInfoTable', 'Update selfInfo finished with code', result.toString());
-      return result;
+      Logger.info('SelfInfoTable' + 'Update selfInfo finished');
+      callback(result);
     });
-    return -1;
   }
 
   /**
