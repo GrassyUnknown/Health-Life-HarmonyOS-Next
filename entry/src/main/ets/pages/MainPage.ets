@@ -41,6 +41,8 @@ function allSize() {
 @Entry
 @Component
 struct Index {
+  // 一些重要的數據在這兒初始化 後續傳給各個子組件
+  // @State 的值改变时，框架会自动更新依赖于这个状态的视图
   @State currentPage: number = 0;
   @State editedTaskInfo: ITaskItem = router.getParams() ? (router.getParams() as Record<string, Object>).editTask as ITaskItem : {
   } as ITaskItem;
@@ -60,6 +62,8 @@ struct Index {
   }
 
   onPageShow() {
+    // 核心数据相关都在这儿
+    // 每次进导航页
     this.nickname = selfInfo.name
     this.img = selfInfo.img
     this.signature = selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig
@@ -74,6 +78,7 @@ struct Index {
         GlobalContext.getContext().setObject('taskListChange', true);
         this.homeStore = new HomeStore(new Date());
       }
+      // 初始化核心数据
       this.checkCurrentTime();
     }
   }
@@ -126,6 +131,7 @@ struct Index {
   build() {
     Tabs({ barPosition: BarPosition.End, controller: this.tabController }) {
       TabContent() {
+        // 傳一些對象
         HomeIndex({ homeStore: $homeStore, editedTaskInfo: $editedTaskInfo, editedTaskID: $editedTaskID })
           .borderWidth({ bottom: 1 })
           .borderColor($r('app.color.primaryBgColor'))

@@ -52,7 +52,7 @@ export default struct HomeTopView {
       }
       .width(Const.THOUSANDTH_1000)
       .padding({ left: $r('app.float.default_24') })
-
+      // 周历
       WeekCalendar({ homeStore: $homeStore })
     }
     .height(Const.THOUSANDTH_500)

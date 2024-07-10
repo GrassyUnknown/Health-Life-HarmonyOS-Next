@@ -56,7 +56,7 @@ export struct CustomDialogView {
       this.achievementDialog.open();
     });
 
-    // task clock dialog
+    // task clock dialog 打卡
     this.broadCast.on(BroadCastType.SHOW_TASK_DETAIL_DIALOG,
       (currentTask: TaskInfo, dialogCallBack: CustomDialogCallback) => {
         Logger.debug('CustomDialogView', 'SHOW_TASK_DETAIL_DIALOG');

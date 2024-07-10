@@ -45,22 +45,26 @@ export struct WeekCalendar {
     } catch (err) {
       Logger.error('HomeIndex->onScrollEnd', JSON.stringify(err));
     }
+    // 设置为当天 （周历标题显示相关）
     this.homeStore.setSelectedShowDate(new Date().getTime());
   }
-
+  // 获取该天进度
   getProgressImg(item: WeekDateModel): Resource {
     let finNum = item.dayInfo?.finTaskNum || 0;
+    // 0
     if (finNum === 0) {
       return $r('app.media.ic_home_undone');
     }
+    // 完成
     if (finNum === (item.dayInfo?.targetTaskNum || 0)) {
       return $r('app.media.ic_home_all_done');
     }
+    // other
     return $r('app.media.ic_home_half_done');
   }
 
-  @Builder
-  ArrowIcon(isRight: boolean) { // 日历的左右箭头
+  @Builder // 日历的左右箭头
+  ArrowIcon(isRight: boolean) {
     Row() {
       Image($r('app.media.ic_right_grey'))
         .width($r('app.float.default_6'))
@@ -102,21 +106,25 @@ export struct WeekCalendar {
         .justifyContent(FlexAlign.Center)
 
         Scroll(this.scroller) {
-          Row() {
+          Row() {// 周历
             ForEach(this.homeStore.dateArr, (item: WeekDateModel, index?: number) => {
+              // 一周的每个天
               Column() {
+                // ‘一’ ‘二’ ... 选中是蓝
                 Text(item.weekTitle)
                   .fontSize($r('app.float.default_12'))
                   .fontWeight(Const.FONT_WEIGHT_500)
+                  // 如果是选中的天，就blue sameDate
                   .fontColor(sameDate(item.date, this.homeStore.showDate) ?
                   $r('app.color.blueColor') : $r('app.color.titleColor'))
                   .fontFamily($r('app.string.HarmonyHeiTi_Medium'))
                   .opacity(Const.OPACITY_6)
+                // 分隔符 也是选中是blue 不选背景色
                 Divider()
                   .margin({ top: Const.DEFAULT_2, bottom: $r('app.float.default_4') })
                   .width($r('app.float.default_12'))
                   .color(sameDate(item.date, this.homeStore.showDate) ? $r('app.color.blueColor') : $r('app.color.white'))
-                //渲染进度图片
+                //渲染每个天的成就进度图片
                 Image(this.getProgressImg(item))
                   .height($r('app.float.default_28'))
                   .objectFit(ImageFit.Contain)
@@ -124,6 +132,7 @@ export struct WeekCalendar {
               }
               .width(`${WEEK_DAY_WIDTH}%`)
               .justifyContent(FlexAlign.SpaceBetween)
+              // 点击事件 set下date 方法具体实现都在CalendarViewModel.ets
               .onClick(() => WeekCalendarMethods.calenderItemClickAction(item, index, this.homeStore))
             })
           }

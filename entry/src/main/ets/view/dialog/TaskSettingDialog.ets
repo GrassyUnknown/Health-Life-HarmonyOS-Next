@@ -25,14 +25,22 @@ import { FrequencyContentType } from '../../model/TaskInitList';
 export struct TargetSettingDialog {
   @Consume settingParams: ITaskItem;
   controller: CustomDialogController = new CustomDialogController({ builder: '' });
-  drinkRange: string[] = createDrinkRange();
-  appleRange: string[] = createAppleRange();
-  runRange: string[] = createRunRange();
-  brushRange: string[] = createBrushRange();
-  smileRange: string[] = createSmileRange();
+
   currentValue: string = this.settingParams.targetValue;
   currentTime: string = Const.DEFAULT_TIME;
+  drinkRange: string[] = createDrinkRange(this.settingParams);
+  appleRange: string[] = createAppleRange(this.settingParams);
+  runRange: string[] = createRunRange(this.settingParams);
+  brushRange: string[] = createBrushRange(this.settingParams);
+  smileRange: string[] = createSmileRange(this.settingParams);
 
+  convertTimeToSeconds(timeStr: string): string {
+  const parts = timeStr.split(':');
+  const hours = parseInt(parts[0], 10);
+  const minutes = parts[1] ? '00' : parts[1];
+  const seconds = '00';
+  return `${hours}:${minutes}:${seconds}`;
+  }
 
   compareTime(startTime: string, endTime: string) {
     if (returnTimeStamp(this.currentTime) < returnTimeStamp(startTime) ||
@@ -79,7 +87,7 @@ export struct TargetSettingDialog {
 
       if ([taskType.getup, taskType.sleepEarly].indexOf(this.settingParams?.taskID) > Const.HAS_NO_INDEX) {
         TimePicker({
-          selected: new Date(`${new Date().toDateString()} 8:00:00`),
+          selected: new Date(`${new Date().toDateString()} ${this.convertTimeToSeconds(this.settingParams.targetValue)}`), //  8:00:00
         })
           .height(Const.THOUSANDTH_800)
           .useMilitaryTime(true)
@@ -91,7 +99,7 @@ export struct TargetSettingDialog {
           this.settingParams?.taskID === taskType.brushTeeth ? this.brushRange : (
             this.settingParams?.taskID === taskType.smile ? this.smileRange : (
               this.settingParams?.taskID === taskType.eatApple ? this.appleRange : this.runRange
-          )))})
+          ))), value: this.settingParams.targetValue+' '+this.settingParams.unit})
           .width(Const.THOUSANDTH_900,)
           .height(Const.THOUSANDTH_800,)
           .onChange((value: string | string[]) => {
@@ -142,7 +150,7 @@ export struct RemindTimeDialog {
       .width(Const.THOUSANDTH_900)
 
       TimePicker({
-        selected: new Date(`${new Date().toDateString()} 8:00:00`),
+        selected: new Date(`${new Date().toDateString()} ${this.settingParams.startTime}`),
       })
         .height(Const.THOUSANDTH_800)
         .useMilitaryTime(true)
@@ -213,7 +221,8 @@ export struct FrequencyDialog {
           ListItem() {
             Row() {
               Text(item?.label).fontSize(Const.DEFAULT_20)
-              Toggle({ type: ToggleType.Checkbox })
+
+              Toggle({ type: ToggleType.Checkbox, isOn: this.settingParams.frequency.includes(item?.id.toString()) })
                 .onChange((isOn) => {
                   item.isChecked = isOn;
                 })
