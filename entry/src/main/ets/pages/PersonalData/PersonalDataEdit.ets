@@ -104,7 +104,9 @@ struct InputFrame{
 @Component
 struct PersonalEditIndex {
   selfInfo: SelfInfo = getSelfInfo();
-  @State img: string = this.selfInfo.img;
+  private selectImg: string[] = ['app.media.head_boy', 'app.media.head_girl'];
+  private idx: number = 0;
+  @Watch('isEdit') @State img: string = this.selfInfo.img == '' ? this.selectImg[this.idx] : this.selfInfo.img;
   @Watch('isEdit') @State name: string = this.selfInfo.name;
   @Watch('isEdit') @State birthdate: string = this.selfInfo.birth;
   @Watch('isEdit') @State gender: string = this.selfInfo.gender;
@@ -215,7 +217,7 @@ struct PersonalEditIndex {
             .onClick(() => {
               let context = getContext(this) as Context.UIAbilityContext;
               this.alertDialog(context, ()=>{
-                router.pushUrl(
+                router.back(
                   {
                     url: 'pages/MainPage',
                     params: {
@@ -268,11 +270,16 @@ struct PersonalEditIndex {
         .width('100%')
         .justifyContent(FlexAlign.SpaceBetween)
 
-        Image($r('app.media.per_name'))
+        Image($r(this.img))
           .width(56)
           .height(56)
           .alignSelf(ItemAlign.Center)
           .margin({ top: '5.5%' })
+          .onClick(()=>{
+            this.idx = (this.idx + 1) % 2
+            this.img = this.selectImg[this.idx]
+            console.info('img='+this.img)
+          })
         Text('头像')
           .fontColor(Color.Black)
           .fontSize(16)

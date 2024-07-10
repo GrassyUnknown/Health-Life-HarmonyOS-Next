@@ -22,14 +22,16 @@ import SelfInfo from '../viewmodel/SelfInfo';
 
 @Component
 export struct MineIndex {
-  @State nickname: string = selfInfo.name;
-  @State signature: string = selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig;
+  @Link nickname: string;
+  @Link signature: string;
+  @Link img: string;
 
   build() {
     Column() {
       UserBaseInfo({
-        nickname: this.nickname,
-        signature: this.signature
+        img: $img,
+        nickname: $nickname,
+        signature: $signature
       });
 
       ListInfo();
