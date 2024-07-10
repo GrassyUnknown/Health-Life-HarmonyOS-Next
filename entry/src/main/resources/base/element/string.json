@@ -94,7 +94,7 @@
     },
     {
       "name": "task_done",
-      "value": "已完成"
+      "value": "√"
     },
     {
       "name": "task_achievement_level",

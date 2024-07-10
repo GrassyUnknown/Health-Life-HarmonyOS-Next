@@ -1,6 +1,16 @@
 {
   "color": [
     {
+      "name": "proGressColor",
+      "value": "#32CD99"
+
+    },
+    {
+      "name": "proGressBgColor",
+      "value": "#D3D3D3"
+
+    },
+    {
       "name": "white",
       "value": "#FFFFFF"
     },
