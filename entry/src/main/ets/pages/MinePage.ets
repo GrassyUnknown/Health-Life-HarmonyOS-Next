@@ -16,11 +16,14 @@
 import { ListInfo } from '../view/ListInfo';
 import { UserBaseInfo } from '../view/UserBaseInfo';
 import { CommonConstants as Const } from '../common/constants/CommonConstants';
+import { selfInfo } from '../entryability/EntryAbility'
+import { router } from '@kit.ArkUI';
+import SelfInfo from '../viewmodel/SelfInfo';
 
 @Component
 export struct MineIndex {
-  @State nickname: string = Const.NICK_NAME;
-  @State signature: string = Const.SIGNATURE;
+  @State nickname: string = selfInfo.name;
+  @State signature: string = selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig;
 
   build() {
     Column() {

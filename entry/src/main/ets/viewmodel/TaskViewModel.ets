@@ -130,7 +130,7 @@ export const addTask = (params: TaskInfo, context: Context) => {
     let taskInfoStr = JSON.stringify(params);
     let taskInfo: TaskInfo = JSON.parse(taskInfoStr);
     taskInfo.date = new Date().toDateString();
-    taskInfo.isDone = true;
+    taskInfo.isDone = false;
     TaskInfoApi.updateDataByDate(taskInfo, (flag: number) => {
       if (!flag) {
         Logger.error('insertTaskSetting', 'updateTaskSetting Error!');
@@ -233,6 +233,18 @@ export const createAppleRange = () => {
     appleRangeArr.push(`${i} 个`);
   }
   return appleRangeArr;
+}
+
+/**
+ * @description Generate the range of running 1 - 30
+ * @return Array<string>
+ */
+export const createRunRange = () => {
+  const runRangeArr: Array<string> = [];
+  for (let i = Const.RUN_STEP; i <= Const.RUN_MAX_RANGE; i += Const.RUN_STEP) {
+    runRangeArr.push(`${i / Const.TIMES_100} km`);
+  }
+  return runRangeArr;
 }
 /**
  * @description Generate the range of brushing 1 - 3

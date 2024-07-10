@@ -20,13 +20,17 @@ import Logger from '../common/utils/Logger';
 import { ITaskItem } from '../model/TaskInitList';
 import { CommonConstants as Const } from '../common/constants/CommonConstants';
 import { NavList, TabId } from '../model/NavItemModel';
+// 导航栏的三个 咱们
 import HomeIndex from '../view/HomeComponent';
 import { AchievementIndex } from '../view/AchievementComponent';
 import { MineIndex } from './MinePage';
+// home存储类
 import { HomeStore } from '../viewmodel/HomeViewModel';
+
 import GlobalInfoApi from '../common/database/tables/GlobalInfoApi';
 import GlobalInfo from '../viewmodel/GlobalInfo';
 import { GlobalContext } from '../common/utils/GlobalContext';
+import { selfInfo } from '../entryability/EntryAbility';
 
 @Styles
 function allSize() {
@@ -43,6 +47,8 @@ struct Index {
   @State editedTaskID: string = '0';
   @State homeStore: HomeStore = new HomeStore(new Date());
   private tabController: TabsController = new TabsController();
+  //@Provide nickname: string = selfInfo.name;
+  //@Provide signature: string = selfInfo.birth + ',' + selfInfo.hobby + ',' + selfInfo.sig;
 
   aboutToAppear() {
     notificationManager.requestEnableNotification().then(() => {
@@ -129,7 +135,10 @@ struct Index {
       .tabBar(this.TabBuilder(TabId.ACHIEVEMENT))
 
       TabContent() {
-        MineIndex()
+        MineIndex({
+          nickname: selfInfo.name,
+          signature: selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig
+        })
           .borderWidth({ bottom: 1 })
           .borderColor($r('app.color.primaryBgColor'))
       }

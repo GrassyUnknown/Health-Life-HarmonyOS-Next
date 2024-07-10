@@ -16,7 +16,7 @@
 import { promptAction } from '@kit.ArkUI';
 import { ITaskItem } from '../../model/TaskInitList';
 import { frequencyRange } from '../../common/utils/Utils';
-import { returnTimeStamp, createAppleRange, createDrinkRange, createBrushRange, createSmileRange, formatTime } from '../../viewmodel/TaskViewModel';
+import { returnTimeStamp, createAppleRange, createDrinkRange, createBrushRange, createSmileRange, createRunRange, formatTime } from '../../viewmodel/TaskViewModel';
 import { taskType } from '../../viewmodel/TaskInfo';
 import { CommonConstants as Const } from '../..//common/constants/CommonConstants';
 import { FrequencyContentType } from '../../model/TaskInitList';
@@ -27,10 +27,12 @@ export struct TargetSettingDialog {
   controller: CustomDialogController = new CustomDialogController({ builder: '' });
   drinkRange: string[] = createDrinkRange();
   appleRange: string[] = createAppleRange();
+  runRange: string[] = createRunRange();
   brushRange: string[] = createBrushRange();
   smileRange: string[] = createSmileRange();
   currentValue: string = this.settingParams.targetValue;
   currentTime: string = Const.DEFAULT_TIME;
+
 
   compareTime(startTime: string, endTime: string) {
     if (returnTimeStamp(this.currentTime) < returnTimeStamp(startTime) ||
@@ -59,6 +61,7 @@ export struct TargetSettingDialog {
       return;
     }
     this.settingParams.targetValue = this.currentValue;
+    // this.settingParams.finValue='0';
   }
 
   build() {
@@ -84,7 +87,11 @@ export struct TargetSettingDialog {
             this.currentTime = formatTime(value);
           })
       } else {
-        TextPicker({ range: this.settingParams?.taskID === taskType.drinkWater ? this.drinkRange : this.settingParams?.taskID === taskType.brushTeeth ? this.brushRange : this.settingParams?.taskID === taskType.smile ? this.smileRange : this.appleRange })
+        TextPicker({ range: this.settingParams?.taskID === taskType.drinkWater ? this.drinkRange : (
+          this.settingParams?.taskID === taskType.brushTeeth ? this.brushRange : (
+            this.settingParams?.taskID === taskType.smile ? this.smileRange : (
+              this.settingParams?.taskID === taskType.eatApple ? this.appleRange : this.runRange
+          )))})
           .width(Const.THOUSANDTH_900,)
           .height(Const.THOUSANDTH_800,)
           .onChange((value: string | string[]) => {

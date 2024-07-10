@@ -5,6 +5,7 @@
     "pages/MainPage",
     "pages/TaskListPage",
     "pages/TaskEditPage",
-    "pages/MonthCalendar"
+    "pages/MonthCalendar",
+    "pages/PersonalData/PersonalDataEdit",
   ]
 }

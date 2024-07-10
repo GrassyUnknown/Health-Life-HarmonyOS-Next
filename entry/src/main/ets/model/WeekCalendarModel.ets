@@ -21,7 +21,7 @@ import WeekCalendarInfo from '../viewmodel/WeekCalendarInfo';
 
 // day number of on week
 export const WEEK_DAY_NUM: number = 7;
-
+// 日历小组件
 export class WeekDateModel {
   weekTitle: string;
   dateStr: string;
@@ -75,7 +75,7 @@ export function getPreviousWeek(showDate: Date): WeekCalendarInfo {
   let weekCalendarInfo: WeekCalendarInfo = new WeekCalendarInfo();
   let arr: Array<WeekDateModel> = [];
   let strArr: Array<string> = [];
-  let currentDay = showDate.getDay() - 1;
+  let currentDay = showDate.getDay() - 1; // getDay 获取是星期几
   // monday is first day of week
   showDate.setDate(showDate.getDate() - currentDay);
   for (let index = WEEK_DAY_NUM; index > 0; index--) {
