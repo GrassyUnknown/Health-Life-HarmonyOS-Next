@@ -68,6 +68,31 @@ function getAchievement(key: string) {
     case 'on_99':
       result = AchievementMap.on_99;
       break;
+    case 'off_100':
+      result = AchievementMap.off_100;
+      break;
+    case 'on_100':
+      result = AchievementMap.on_100;
+      break;
+    case 'off_200':
+      result = AchievementMap.off_200;
+      break;
+    case 'on_200':
+      result = AchievementMap.on_200;
+      break;
+    case 'off_300':
+      result = AchievementMap.off_300;
+      break;
+    case 'on_300':
+      result = AchievementMap.on_300;
+      break;
+    case 'off_400':
+      result = AchievementMap.off_400;
+      break;
+    case 'on_400':
+      result = AchievementMap.on_400;
+      break;
+
     default:
       break;
   }

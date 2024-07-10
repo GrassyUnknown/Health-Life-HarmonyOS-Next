@@ -104,7 +104,9 @@ struct InputFrame{
 @Component
 struct PersonalEditIndex {
   selfInfo: SelfInfo = getSelfInfo();
-  @State img: string = this.selfInfo.img;
+  private selectImg: string[] = ['app.media.head_boy', 'app.media.head_girl'];
+  private idx: number = 0;
+  @Watch('isEdit') @State img: string = this.selfInfo.img == '' ? this.selectImg[this.idx] : this.selfInfo.img;
   @Watch('isEdit') @State name: string = this.selfInfo.name;
   @Watch('isEdit') @State birthdate: string = this.selfInfo.birth;
   @Watch('isEdit') @State gender: string = this.selfInfo.gender;
@@ -171,8 +173,14 @@ struct PersonalEditIndex {
       range: sexArray,
       selected: this.selectedGender,
       onAccept: (result: TextPickerResult) => {
-        sexCallback(result.value[0]);
-        this.selectedGender = result.index[0]
+        if(typeof result.value === 'string') {
+          sexCallback(result.value);
+          this.selectedGender = result.index[0]
+        } else {
+          sexCallback(result.value[0]);
+          this.selectedGender = result.index[0]
+        }
+
       },
       onCancel: () => {
         console.info('TextPickerDialog onCancel');
@@ -228,7 +236,11 @@ struct PersonalEditIndex {
             Text('保存')
               .fontColor(Color.Green)
               .fontSize(20)
-              .margin({ top: 20,left:20 })
+              .margin({
+                top: 20,
+                left:20,
+                right: 30
+              })
               .alignSelf(ItemAlign.Center)
               .onClick(()=>{
                 let selfInfo = new SelfInfo(
@@ -247,17 +259,27 @@ struct PersonalEditIndex {
             Text('保存')
               .fontColor(Color.Black)
               .fontSize(20)
-              .margin({ top: 20,left:20 })
+              .margin({
+                top: 20,
+                left:20,
+                right: 30
+              })
               .alignSelf(ItemAlign.Center)
           }
         }
         .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
 
-        Image($r('app.media.per_name'))
+        Image($r(this.img))
           .width(56)
           .height(56)
           .alignSelf(ItemAlign.Center)
           .margin({ top: '5.5%' })
+          .onClick(()=>{
+            this.idx = (this.idx + 1) % 2
+            this.img = this.selectImg[this.idx]
+            console.info('img='+this.img)
+          })
         Text('头像')
           .fontColor(Color.Black)
           .fontSize(16)
