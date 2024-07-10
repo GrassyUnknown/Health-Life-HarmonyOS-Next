@@ -47,8 +47,9 @@ struct Index {
   @State editedTaskID: string = '0';
   @State homeStore: HomeStore = new HomeStore(new Date());
   private tabController: TabsController = new TabsController();
-  //@Provide nickname: string = selfInfo.name;
-  //@Provide signature: string = selfInfo.birth + ',' + selfInfo.hobby + ',' + selfInfo.sig;
+  @State nickname: string = selfInfo.name;
+  @State signature: string = selfInfo.birth + ',' + selfInfo.hobby + ',' + selfInfo.sig;
+  @State img: string = selfInfo.img == '' ? 'app.media.per_name' : selfInfo.img
 
   aboutToAppear() {
     notificationManager.requestEnableNotification().then(() => {
@@ -59,6 +60,9 @@ struct Index {
   }
 
   onPageShow() {
+    this.nickname = selfInfo.name
+    this.img = selfInfo.img
+    this.signature = selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig
     Logger.info('onPageShow', JSON.stringify(router.getParams()));
     let params = (router.getParams() ? router.getParams() : {}) as Record<string, Object>;
     let result = params.editTask ? params.editTask as string : '{}';
@@ -136,8 +140,9 @@ struct Index {
 
       TabContent() {
         MineIndex({
-          nickname: selfInfo.name,
-          signature: selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig
+          nickname: $nickname,
+          signature: $signature,
+          img: $img
         })
           .borderWidth({ bottom: 1 })
           .borderColor($r('app.color.primaryBgColor'))
