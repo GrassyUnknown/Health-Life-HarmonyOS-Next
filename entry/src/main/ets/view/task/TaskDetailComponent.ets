@@ -54,7 +54,7 @@ export default struct TaskDetail {
     const routerParams: ITaskItem = JSON.parse(params.params as string);
     return routerParams;
   }
-
+  // 每次改变任务参数时触发
   onParamsChanged() {
     this.isChanged = true;
   }
@@ -62,7 +62,7 @@ export default struct TaskDetail {
   backIndexParams(): string {
     return formatParams(this.settingParams);
   }
-
+  // 确认编辑完成任务
   finishTaskEdit() {
     if (this.isChanged) {
       let context: Context = getContext(this) as common.Context;

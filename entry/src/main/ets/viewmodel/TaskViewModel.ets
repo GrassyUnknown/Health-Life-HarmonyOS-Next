@@ -215,10 +215,10 @@ export const formatTime = (value: TimePickerResult) => {
  * @description Range of generated drinking water 0.25 - 5 L
  * @return Array<string>
  */
-export const createDrinkRange = () => {
+export const createDrinkRange = (iTask: ITaskItem) => {
   const drinkRangeArr: Array<string> = []
   for (let i = Const.DRINK_STEP; i <= Const.DRINK_MAX_RANGE; i += Const.DRINK_STEP) {
-    drinkRangeArr.push(`${i / Const.TIMES_100} L`);
+    drinkRangeArr.push(`${i / Const.TIMES_100} ${iTask.unit}`);
   }
   return drinkRangeArr;
 }
@@ -227,10 +227,10 @@ export const createDrinkRange = () => {
  * @description Generate the range of eating apples 1 - 100
  * @return Array<string>
  */
-export const createAppleRange = () => {
+export const createAppleRange = (iTask: ITaskItem) => {
   const appleRangeArr: Array<string> = [];
   for (let i = 1; i <= Const.EAT_APPLE_RANGE; i++) {
-    appleRangeArr.push(`${i} 个`);
+    appleRangeArr.push(`${i} ${iTask.unit}`);
   }
   return appleRangeArr;
 }
@@ -239,10 +239,10 @@ export const createAppleRange = () => {
  * @description Generate the range of running 1 - 30
  * @return Array<string>
  */
-export const createRunRange = () => {
+export const createRunRange = (iTask: ITaskItem) => {
   const runRangeArr: Array<string> = [];
   for (let i = Const.RUN_STEP; i <= Const.RUN_MAX_RANGE; i += Const.RUN_STEP) {
-    runRangeArr.push(`${i / Const.TIMES_100} km`);
+    runRangeArr.push(`${i / Const.TIMES_100} ${iTask.unit}`);
   }
   return runRangeArr;
 }
@@ -250,10 +250,10 @@ export const createRunRange = () => {
  * @description Generate the range of brushing 1 - 3
  * @return Array<string>
  */
-export const createBrushRange = () => {
+export const createBrushRange = (iTask: ITaskItem) => {
   const brushRangeArr: Array<string> = [];
   for (let i = 1; i <= Const.BRUSH_MAX_RANGE; i++) {
-    brushRangeArr.push(`${i} 次`);
+    brushRangeArr.push(`${i} ${iTask.unit}`);
   }
   return brushRangeArr;
 }
@@ -261,10 +261,10 @@ export const createBrushRange = () => {
  * @description Generate the range of smiling 1 - 3
  * @return Array<string>
  */
-export const createSmileRange = () => {
+export const createSmileRange = (iTask: ITaskItem) => {
   const smileRangeArr: Array<string> = [];
   for (let i = 1; i <= Const.SMILE_MAX_RANGE; i++) {
-    smileRangeArr.push(`${i} 次`);
+    smileRangeArr.push(`${i} ${iTask.unit}`);
   }
   return smileRangeArr;
 }

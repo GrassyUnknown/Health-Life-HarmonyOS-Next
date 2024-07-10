@@ -21,12 +21,14 @@ import WeekCalendarInfo from '../viewmodel/WeekCalendarInfo';
 
 // day number of on week
 export const WEEK_DAY_NUM: number = 7;
-// 日历小组件
+// 核心数组
 export class WeekDateModel {
-  weekTitle: string;
-  dateStr: string;
-  date: Date;
+  weekTitle: string; // "二"
+  dateStr: string; // "Tue Aug 19 1975"
+  date: Date; //
+  // 当天任务相关信息 目标数量0 完成数量0
   dayInfo: DayInfo = new DayInfo('', 0, 0);
+  // 任务对象列表 finVal targetVal ...
   taskList: TaskInfo[] = [];
 
   constructor(weekTitle: string, dateStr: string, date: Date) {
@@ -45,18 +47,22 @@ export function initializeOnStartUp(date: Date): WeekCalendarInfo {
   let weekCalendarInfo: WeekCalendarInfo = new WeekCalendarInfo();
   let arr: Array<WeekDateModel> = [];
   let strArr: Array<string> = [];
+  // 星期 1-6 => 0-5
   let currentDay = date.getDay() - 1;
+  // 星期 日 => 6
   if (date.getDay() === 0) {
     currentDay = 6;
   }
   Logger.debug('WeekCalendarModel', date.toISOString());
-  // monday is first day of week
-  date.setDate(date.getDate() - currentDay)
+  // 使得 monday is first day of week
+  date.setDate(date.getDate() - currentDay) // 获取周一
+  // 当前日所在的一周
   for (let index = 0; index < WEEK_DAY_NUM; index++) {
     let tempDate = new Date(date);
     tempDate.setDate(date.getDate() + index);
     let dateStr = dateToStr(tempDate);
     strArr.push(dateStr);
+    // 核心数组
     arr.push(new WeekDateModel(WEEK_TITLES[tempDate.getDay()], dateStr, tempDate))
   }
   Logger.debug('WeekCalendarModel', 'initialWeekDate' + JSON.stringify(arr))

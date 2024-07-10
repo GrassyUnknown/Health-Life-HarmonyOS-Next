@@ -54,7 +54,7 @@ function titleTextStyle() {
 export default struct HomeIndex {
   @Provide broadCast: BroadCast = HealthDataSrcMgr.getInstance().getBroadCast();
   @State naviAlpha: number = 0;
-  @Link homeStore: HomeStore;
+  @Link homeStore: HomeStore; // 核心類
   @Link editedTaskInfo: ITaskItem;
   @Link @Watch('taskChange') editedTaskID: string;
   private scroller: Scroller = new Scroller();
@@ -63,9 +63,9 @@ export default struct HomeIndex {
   taskChange() {
     this.homeStore.updateTaskInfoList(this.editedTaskInfo);
   }
-
+  // 打卡 点任务列表时触发
   taskItemAction(item: TaskInfo, isClick: boolean): void {
-    if (!this.homeStore.checkCurrentDay()) {
+    if (!this.homeStore.checkCurrentDay()) {// 今天才能打卡
       return;
     }
     if (isClick) {
@@ -90,7 +90,7 @@ export default struct HomeIndex {
     }
   }
 
-  //confirm clockL
+  //confirm clockL 确认打卡
   onConfirm(task: TaskInfo) {
     this.homeStore.taskClock(task).then((res: AchievementInfo) => {
       if (res.showAchievement) {
@@ -124,10 +124,14 @@ export default struct HomeIndex {
     Stack() {
       Scroll(this.scroller) {
         Column() {
-          HomeTopView({ homeStore: $homeStore })
+          // 進度 日曆
+          HomeTopView({ homeStore: $homeStore }) //傳進去
+          //
           Text($r('app.string.task_list')).titleTextStyle()
+          //
           if (this.homeStore.getTaskListOfDay().length > 0) {
             Column({ space: Const.DEFAULT_8 }) {
+
               ForEach(this.homeStore.getTaskListOfDay(), (item: TaskInfo) => {
                 TaskCard({
                   taskInfoStr: JSON.stringify(item),
@@ -146,6 +150,8 @@ export default struct HomeIndex {
               right: Const.THOUSANDTH_33
             })
             .width(Const.THOUSANDTH_1000)
+
+
           } else {
             Column({ space: Const.DEFAULT_8 }) {
               Image($r('app.media.ic_no_data'))

@@ -32,11 +32,13 @@ import AchievementInfo from './AchievementInfo';
 @Observed
 export class HomeStore {
   public currentDate: Date;
+  // 核心数据结构
   public dateArr: Array<WeekDateModel> = []; // data source list
   public selectedDay: number; // selected day of on week
   public showDate: number;
   public dateTitle: string;
-  public selectedDayInfo: WeekDateModel = new WeekDateModel('', '', new Date()); // task info on selected day
+  // task info on selected day
+  public selectedDayInfo: WeekDateModel = new WeekDateModel('', '', new Date());
 
   constructor(currentDate: Date) {
     this.currentDate = currentDate;
@@ -44,8 +46,9 @@ export class HomeStore {
     this.dateTitle = weekDateFormat(currentDate.getTime());
     this.selectedDay = (new Date().getDay() + WEEK_DAY_NUM - 1) % WEEK_DAY_NUM;
   }
-
+  // MainPage show触发
   public initData() {
+    // 初始化核心 周历每日数据 数组
     let weekCalendarInfo: WeekCalendarInfo = initializeOnStartUp(this.currentDate);
     this.dateArr = weekCalendarInfo.arr;
     Logger.info('this.currentDate', this.currentDate.toDateString());
@@ -94,9 +97,10 @@ export class HomeStore {
   public checkCurrentDay(): boolean {
     return dateToStr(new Date()) === this.selectedDayInfo?.dateStr;
   }
-
+  // 选中日时触发 核心是从数据库里读task相关信息
   public updateSelectedDayInfo(selectedDayInfo: WeekDateModel) {
     Logger.debug('updateSelectedDayInfo', JSON.stringify(selectedDayInfo));
+    // 内存裏任務列表空著 get data form db
     if (selectedDayInfo.taskList?.length === 0) {
       // get data form db
       TaskInfoTableApi.query(selectedDayInfo.dateStr, true, (res: TaskInfo[]) => {
@@ -114,11 +118,13 @@ export class HomeStore {
         this.selectedDayInfo = selectedDayInfo;
       });
     } else {
+      // 賦給當前HomeStore對象
       this.selectedDayInfo = selectedDayInfo;
     }
     Logger.info("selectedDayTaskInfo: ", JSON.stringify(selectedDayInfo.taskList));
   }
 
+  // 编辑完成后更新任务信息
   public updateTaskInfoList(editedTaskInfo: ITaskItem) {
     if (editedTaskInfo?.taskID) {
       // edited task
@@ -241,7 +247,7 @@ export class HomeStore {
       showAchievement: ACHIEVEMENT_LEVEL_LIST.includes(achievementLevel)
     } as AchievementInfo;
   }
-
+  // 打卡核心方法
   updateTask(task: TaskInfo): Promise<TaskInfo> {
     return new Promise((resolve, reject) => {
       let taskID = task.taskID;
@@ -257,8 +263,8 @@ export class HomeStore {
       } else {
         let value = Number(finValue) + step;
         updateTask.isDone = updateTask.isDone || value >= Number(targetValue);
-        // updateTask.finValue = updateTask.isDone ? targetValue : `${value}`;
-        updateTask.finValue = `${value}`
+        updateTask.finValue = updateTask.isDone ? targetValue : `${value}`;
+        // updateTask.finValue = `${value}`
       }
       TaskInfoTableApi.updateDataByDate(updateTask, (res: number) => {
         if (!res || hasExceed) {

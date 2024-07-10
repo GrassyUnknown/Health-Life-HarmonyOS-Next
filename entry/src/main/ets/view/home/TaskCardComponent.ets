@@ -38,7 +38,7 @@ export struct TaskCard {
   clickAction: Function = (isClick: boolean) => {
   };
   @State taskInfo: TaskInfo = new TaskInfo(-1, '', -1, '', false, '', '', '', false, '', false);
-
+  // 实例化之后 build之前
   aboutToAppear() {
     this.taskInfo = JSON.parse(this.taskInfoStr);
   }

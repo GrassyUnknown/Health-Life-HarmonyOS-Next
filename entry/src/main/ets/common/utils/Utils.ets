@@ -21,7 +21,7 @@ const DAY: string = '日';
 const WEEK: string = '星期';
 const DAYS_OF_WEEK: number = 7;
 const SUNDAY_FIRST_SHIFT: number = 6;
-
+//
 export const weekTitleFunc = () => {
   const weekTitleArr: Array<string> = [];
   for (let index = 0; index < CHINESE_OF_WEEK.length; index++) {
@@ -29,7 +29,7 @@ export const weekTitleFunc = () => {
   }
   return weekTitleArr;
 }
-
+// ^^^ weekTitleArr
 export const WEEK_TITLES: string[] = weekTitleFunc();
 
 // one digit or two number convert into two digit time format
@@ -79,7 +79,7 @@ export const frequencyRange = () => {
     frequencyRangeArr.push({
       id: (index + 1),
       label: `${WEEK}${item}`,
-      isChecked: false
+      isChecked: true,
     } as FrequencyContentType)
   });
   return frequencyRangeArr;
