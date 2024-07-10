@@ -37,6 +37,10 @@
       "value": "关于"
     },
     {
+      "name": "mine_introduce",
+      "value": "功能介绍"
+    },
+    {
       "name": "clock_in",
       "value": "打卡"
     },
