@@ -6,6 +6,6 @@
     "pages/TaskListPage",
     "pages/TaskEditPage",
     "pages/MonthCalendar",
-    "pages/PersonalData/PersonalDataEdit",
+    "pages/PersonalData/PersonalDataEdit"
   ]
 }
