@@ -273,7 +273,7 @@ export struct CJCalendar {
   // 当前显示月份
   currMonth: Date = new Date()
   /** 操作模式 */
-  optMode: OptMode = OptMode.NORMAL
+  optMode: OptMode = OptMode.MULTIPLE
   startDate: Date = new Date("1970-01-01")
   endDate: Date = new Date(this.currMonth.getFullYear() + 10, 0, 1)
   selectedStyle: SelectedStyle = SelectedStyle.ALONE

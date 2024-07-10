@@ -108,6 +108,7 @@ struct TaskClock {
 
   build() {
     Column({ space: Const.DEFAULT_12 }) {
+    //Column() {
       //CJCalendar()//日历
       CJCalendar({
         defSelectedItems:[
@@ -138,7 +139,7 @@ struct TaskClock {
         .onClick(() => {
           this.cancel();
         })
-    }
+    }.alignItems(HorizontalAlign.Center).justifyContent(FlexAlign.Center)
   }
 }
 
