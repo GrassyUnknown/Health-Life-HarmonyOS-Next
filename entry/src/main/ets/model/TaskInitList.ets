@@ -83,7 +83,7 @@ export const TaskMapById: Array<ITaskItem> = [
     targetValue: '0.25',
     isOpen: false,
     unit: 'L',
-    step: 0,
+    step: 0.25,
     isInit: true,
     isAlarm: false,
     startTime: '08: 00',

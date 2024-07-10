@@ -193,6 +193,10 @@
       "value": "确定"
     },
     {
+      "name": "retHome",
+      "value": "返回首页"
+    },
+    {
       "name": "privacy_title",
       "value": "请在“健康生活”权限管理中开启隐私权限"
     },

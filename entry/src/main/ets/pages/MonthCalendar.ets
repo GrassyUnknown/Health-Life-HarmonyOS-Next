@@ -25,28 +25,49 @@ struct MonthCalendar {
 
   goToHomePage() {
     clearInterval(this.intervalId);
-    router.replaceUrl({ url: 'pages/MainPage' });
-  }
+    router.back({
+      url: 'pages/MainPage'
+  })}
 
   aboutToAppear() {
 
   }
 
   build() {
+    Row(){
     Column() {
-      Row(){
-        Text($r('app.string.jump_ad', this.duration))
-          .fontSize($r('app.float.default_12'))
-          .fontColor($r('app.color.black'))
+      /*Flex({direction: FlexDirection.Row}){
+
+        Text($r('app.string.retHome', this.duration))
+          .fontSize($r('app.float.default_14'))
+          .fontColor(Color.White)
           .borderRadius($r('app.float.default_16'))
           .letterSpacing(Const.LETTER_1)
-          .height($r('app.float.default_36'))
-          .backgroundColor('rgba(188, 18, 18, 0.20)')
+          .height($r('app.float.default_42'))
+          .backgroundColor('rgba(188, 18, 18, 0.30)')
           .border({ color: $r('app.color.white'), width: $r('app.float.default_1') })
-          .margin({ top: $r('app.float.default_36') })
+          .margin({ top: $r('app.float.default_36'),left:$r('app.float.default_36') })
           .padding($r('app.float.default_8'))
           .onClick(() => this.goToHomePage())
-      }
+      }*/
+      Row(){
+        Image($r('app.media.ic_back_home'))
+          .width(26)
+          .height(26)
+          .alignSelf(ItemAlign.Start)
+          .margin({
+            left: '7.2%',
+            top: 19
+          })
+          .onClick(() => this.goToHomePage())
+        Text('返回首页')
+          .fontColor(Color.Black)
+          .fontSize(20)
+          .margin({ top: 20,left:10 })
+          .alignSelf(ItemAlign.Center)
+        }
+      .width('100%')
+      // .justifyContent()
       Row() {
         CJCalendar().height("100%")
       }
@@ -58,4 +79,4 @@ struct MonthCalendar {
     .justifyContent(FlexAlign.SpaceBetween)
     }
   }
-}
+}}
