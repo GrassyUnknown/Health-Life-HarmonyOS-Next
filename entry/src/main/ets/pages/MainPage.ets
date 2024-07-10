@@ -51,7 +51,7 @@ struct Index {
   private tabController: TabsController = new TabsController();
   @State nickname: string = selfInfo.name;
   @State signature: string = selfInfo.birth + ',' + selfInfo.hobby + ',' + selfInfo.sig;
-  @State img: string = selfInfo.img == '' ? 'app.media.per_name' : selfInfo.img
+  @State img: string = 'app.media.head_boy'
 
   aboutToAppear() {
     notificationManager.requestEnableNotification().then(() => {
@@ -64,8 +64,8 @@ struct Index {
   onPageShow() {
     // 核心数据相关都在这儿
     // 每次进导航页
-    this.nickname = selfInfo.name
-    this.img = selfInfo.img
+    this.nickname = selfInfo.name == '' ? '点燃星海' : selfInfo.name
+    this.img = selfInfo.img == '' ? 'app.media.head_boy' : this.img
     this.signature = selfInfo.birth + '-' + selfInfo.hobby + '-' + selfInfo.sig
     Logger.info('onPageShow', JSON.stringify(router.getParams()));
     let params = (router.getParams() ? router.getParams() : {}) as Record<string, Object>;
