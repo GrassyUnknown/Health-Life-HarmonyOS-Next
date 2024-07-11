@@ -19,7 +19,8 @@ import { TaskMapById, ITaskItem, ACHIEVEMENT_LEVEL_LIST } from '../model/TaskIni
 import TaskInfo from './TaskInfo';
 import DayInfo from './DayInfo';
 import { dateToStr, weekDateFormat } from '../common/utils/Utils';
-import { WeekDateModel, initializeOnStartUp, getPreviousWeek, WEEK_DAY_NUM } from '../model/WeekCalendarModel';
+import { WeekDateModel, initializeOnStartUp, getPreviousWeek, WEEK_DAY_NUM,
+  MONTH3_DAY_NUM } from '../model/WeekCalendarModel';
 import DatabaseApi from '../model/DatabaseModel';
 import TaskInfoTableApi from '../common/database/tables/TaskInfoApi';
 import DayInfoApi from '../common/database/tables/DayInfoApi';
@@ -28,6 +29,11 @@ import Logger from '../common/utils/Logger';
 import GlobalInfo from './GlobalInfo';
 import WeekCalendarInfo from './WeekCalendarInfo';
 import AchievementInfo from './AchievementInfo';
+import { addTask, formatParams } from './TaskViewModel';
+import { common } from '@kit.AbilityKit';
+import { GlobalContext } from '../common/utils/GlobalContext';
+import { promptAction, router } from '@kit.ArkUI';
+import TaskInfoApi from '../common/database/tables/TaskInfoApi';
 
 @Observed
 export class HomeStore {
@@ -40,6 +46,10 @@ export class HomeStore {
   // task info on selected day
   public selectedDayInfo: WeekDateModel = new WeekDateModel('', '', new Date());
 
+  // add for calendar Month view
+  public MonthDayInfoListArr: DayInfo[] = [];
+  public MonthTaskListArr: TaskInfo[][] = [];
+
   constructor(currentDate: Date) {
     this.currentDate = currentDate;
     this.showDate = currentDate.getTime();
@@ -48,6 +58,28 @@ export class HomeStore {
   }
   // MainPage show触发
   public initData() {
+    // 获取90天的字符串
+    let curDate = new Date();
+    let firstLogDate = new Date(curDate);
+    firstLogDate.setDate(curDate.getDate() - MONTH3_DAY_NUM);
+    let strArr:string[] = [];
+    for (let index = 0; index <= MONTH3_DAY_NUM; index++) {
+      let tempDate = new Date(firstLogDate);
+      tempDate.setDate(tempDate.getDate() + index);
+      let dateStr = dateToStr(tempDate);
+      strArr.push(dateStr);
+    }
+    // 初始化 month view 相关 总任务
+    DayInfoApi.queryList(strArr, (res: DayInfo[]) => {
+      this.MonthDayInfoListArr=res;
+    })
+    // 初始化 month view 相关 子任务
+    for(let index=0;index<strArr.length;++index){
+      TaskInfoApi.query(strArr[index], true,(res: TaskInfo[]) =>{
+          this.MonthTaskListArr.push(res);
+      })
+    }
+
     // 初始化核心 周历每日数据 数组
     let weekCalendarInfo: WeekCalendarInfo = initializeOnStartUp(this.currentDate);
     this.dateArr = weekCalendarInfo.arr;
@@ -124,6 +156,20 @@ export class HomeStore {
     Logger.info("selectedDayTaskInfo: ", JSON.stringify(selectedDayInfo.taskList));
   }
 
+  // update db
+  updateTaskByDate(task: TaskInfo): Promise<number> {
+    return new Promise((resolve, reject) => {
+      TaskInfoApi.updateDataByDate(task, (flag: number) => {
+        if (!flag) {
+          Logger.error('insertTaskSetting', 'updateTaskSetting Error!');
+          reject(flag);
+        } else {
+          resolve(flag);
+        }
+      });
+    });
+  }
+
   // 编辑完成后更新任务信息
   public updateTaskInfoList(editedTaskInfo: ITaskItem) {
     if (editedTaskInfo?.taskID) {
@@ -135,28 +181,62 @@ export class HomeStore {
       let startTime = editedTaskInfo.startTime;
       let endTime = editedTaskInfo.endTime;
       let isOpen = editedTaskInfo.isOpen;
-      let finValue = editedTaskInfo.finValue;
+      let finValue = editedTaskInfo.finValue; // 传不同任务的初始值
       let task = new TaskInfo(0, dateToStr(new Date()), taskID, targetValue, isAlarm,
-        startTime, endTime, frequency, true, finValue, isOpen);
+        startTime, endTime, frequency, true, finValue, isOpen);// 这个后续还要根据原始值修改，所以一些初始值无所谓
       this.dateArr = this.dateArr.map((item: WeekDateModel) => {
         if (task.date === item.dateStr) {
           Logger.info('item', JSON.stringify(item));
           let taskList: TaskInfo[] = item.taskList;
           const dayInfo: DayInfo = item.dayInfo;
           if (editedTaskInfo.isOpen) {
+            // taskList = taskList.filter((taskItem) => taskItem.taskID != taskID);
+              // .concat(task)
+              // .sort((a, b) => a.taskID - b.taskID);
+            // add or update
+            let filtered_taskList = taskList.filter((taskItem) => taskItem.taskID != taskID);
+            // update task
+            if(filtered_taskList.length!=taskList.length){
+              let old_task=taskList.filter((taskItem) => taskItem.taskID == taskID)[0];
+              task.finValue=old_task.finValue;
+              if(task.finValue>=task.targetValue){task.isDone=true;}
+              else{
+                task.isDone=false;
+              }
+
+            }
             // add task
-            taskList = taskList.filter((taskItem) => taskItem.taskID != taskID)
-              .concat(task)
-              .sort((a, b) => a.taskID - b.taskID);
+            taskList=filtered_taskList.concat(task).sort((a, b) => a.taskID - b.taskID);
+            // write db
+            this.updateTaskByDate(task);
+
+            // let context: Context = getContext(this) as common.Context;
+            // addTask(task, context).then((res: number) => {
+            //   GlobalContext.getContext().setObject('taskListChange', true);
+            //   router.back({
+            //     url: 'pages/MainPage',
+            //     params: {
+            //       editTask: formatParams(editedTaskInfo),
+            //     }
+            //   })
+            //   Logger.info('addTaskFinished', JSON.stringify(res));
+            // }).catch((error: Error) => {
+            //   promptAction.showToast({
+            //     message: Const.SETTING_FINISH_FAILED_MESSAGE
+            //   })
+            //   Logger.error('addTaskFailed', JSON.stringify(error));
+            // })
+
+            // update dayInfo
             let count: number = 0;
             taskList.forEach((taskItem: TaskInfo) => {
               if (taskItem.isDone) {
                 count++;
               }
             });
-            if (count > dayInfo.finTaskNum) {
+            // if (count > dayInfo.finTaskNum) {
               dayInfo.finTaskNum = count;
-            }
+            // }
           } else {
             // delete task
             let taskIndex = taskList.findIndex((taskItem) => taskItem.taskID === taskID);
@@ -250,6 +330,7 @@ export class HomeStore {
   // 打卡核心方法
   updateTask(task: TaskInfo): Promise<TaskInfo> {
     return new Promise((resolve, reject) => {
+
       let taskID = task.taskID;
       let targetValue = task.targetValue;
       let finValue = task.finValue;

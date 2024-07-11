@@ -25,7 +25,7 @@ struct MonthCalendar {
   @State duration: number = Const.AD_DURATION;
   private intervalId: number = -1;
   private isChanged: boolean = false;
-
+  private selectedItems: Array<string | Date> = [];
   goToHomePage() {
     clearInterval(this.intervalId);
     router.back({
@@ -40,10 +40,10 @@ struct MonthCalendar {
     const routerParams: HomeStore = JSON.parse(params.params as string);
     return routerParams;
   }
-  selectedItems: Array<string | Date> = [];
+
   aboutToAppear() {
-    for (let myMonthHomeStoreElement of this.myMonthHomeStore.dateArr) {
-      if( myMonthHomeStoreElement.dayInfo.targetTaskNum!=0 && myMonthHomeStoreElement.dayInfo.targetTaskNum == myMonthHomeStoreElement.dayInfo.finTaskNum)
+    for (let myMonthHomeStoreElement of this.myMonthHomeStore.MonthDayInfoListArr) {
+      if( myMonthHomeStoreElement.targetTaskNum!=0 && myMonthHomeStoreElement.targetTaskNum == myMonthHomeStoreElement.finTaskNum)
         this.selectedItems.push(myMonthHomeStoreElement.date)
 
     }

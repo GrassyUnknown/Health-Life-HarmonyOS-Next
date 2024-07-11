@@ -68,6 +68,7 @@ export default struct HomeIndex {
     if (!this.homeStore.checkCurrentDay()) {// 今天才能打卡
       return;
     }
+    // 点击
     if (isClick) {
       // click to clock
       let callback: CustomDialogCallback = {
@@ -77,8 +78,9 @@ export default struct HomeIndex {
         }
       };
       this.broadCast.emit(BroadCastType.SHOW_TASK_DETAIL_DIALOG, [item, callback]);
-    } else {
-      // edit task
+    }
+    else {
+      // edit task 长按
       let editTaskStr: string = JSON.stringify(TaskMapById[item.taskID - 1]);
       let editTask: ITaskItem = JSON.parse(editTaskStr);
       editTask.targetValue = item?.targetValue;

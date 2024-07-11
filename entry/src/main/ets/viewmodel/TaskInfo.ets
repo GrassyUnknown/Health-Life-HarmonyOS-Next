@@ -53,8 +53,8 @@ export default class TaskInfo {
     this.startTime = startTime;
     this.endTime = endTime;
     this.frequency = frequency;
-    // this.isDone = isDone;
-    this.isDone = false;
+    this.isDone = isDone;
+    // this.isDone = false;
     this.finValue = finValue;
     this.isOpen = isOpen;
   }
