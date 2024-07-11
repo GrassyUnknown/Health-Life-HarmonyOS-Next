@@ -183,7 +183,7 @@ export class HomeStore {
       let isOpen = editedTaskInfo.isOpen;
       let finValue = editedTaskInfo.finValue; // 传不同任务的初始值
       let task = new TaskInfo(0, dateToStr(new Date()), taskID, targetValue, isAlarm,
-        startTime, endTime, frequency, true, finValue, isOpen);// 这个后续还要根据原始值修改，所以一些初始值无所谓
+        startTime, endTime, frequency, false, finValue, isOpen);// 这个后续还要根据原始值修改，所以一些初始值无所谓
       this.dateArr = this.dateArr.map((item: WeekDateModel) => {
         if (task.date === item.dateStr) {
           Logger.info('item', JSON.stringify(item));
@@ -209,23 +209,6 @@ export class HomeStore {
             taskList=filtered_taskList.concat(task).sort((a, b) => a.taskID - b.taskID);
             // write db
             this.updateTaskByDate(task);
-
-            // let context: Context = getContext(this) as common.Context;
-            // addTask(task, context).then((res: number) => {
-            //   GlobalContext.getContext().setObject('taskListChange', true);
-            //   router.back({
-            //     url: 'pages/MainPage',
-            //     params: {
-            //       editTask: formatParams(editedTaskInfo),
-            //     }
-            //   })
-            //   Logger.info('addTaskFinished', JSON.stringify(res));
-            // }).catch((error: Error) => {
-            //   promptAction.showToast({
-            //     message: Const.SETTING_FINISH_FAILED_MESSAGE
-            //   })
-            //   Logger.error('addTaskFailed', JSON.stringify(error));
-            // })
 
             // update dayInfo
             let count: number = 0;
