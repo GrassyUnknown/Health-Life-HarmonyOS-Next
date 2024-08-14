@@ -1,3 +1,9 @@
+本项目是2024年暑期华为HarmonyOS菁英班应用开发实践，基于鸿蒙应用demo：[HarmonyOS_Codelabs/Healthy_life](https://gitee.com/harmonyos_codelabs/Healthy_life)修复了一些问题并实现了一些新特性。
+
+项目由小组成员共同完成。项目在gitee上完成协作：[艾先泽/点燃星海](https://gitee.com/ai_xian_ze/health/)，这里是项目在github上的副本。
+
+以下是应用简介
+
 # 健康生活应用
 
 ### 简介
